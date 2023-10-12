@@ -16,9 +16,14 @@ import {StatusBar} from 'react-native';
 import Cart from './screen/Cart';
 import Listccdb from './screen/Category/Caycanhdeban/Listccdb';
 import CcdbScreen from './screen/Category/Caycanhdeban/CcdbHome';
-
+import SearchScreen from './screen/Search';
+import CartProduct from './screen/CartProduct';
 const App = () => {
-  return <AuthStack />;
+  return  <AuthStack />;
+  // <CartProduct />
+  <AuthStack />;
+  // <SearchScreen />;
+
   // <CcdbScreen />;
   // <Listccdb />;
 

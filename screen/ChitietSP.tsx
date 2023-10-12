@@ -43,23 +43,25 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, ScrollView,TouchableOpacity} from 'react-native';
 import QuantitySelector from '../navigation/QuantitySelector';
+import Navigation from '../Navigation';
+import { useNavigation } from '@react-navigation/native';
 
 
 const ChitietSP = ({route}) => {
   const {product} = route.params;
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={{flexDirection: 'row', marginTop: 10}}>
+      <View style={{flexDirection: 'row', marginTop: 5,marginLeft:5}}>
         <View>
           {product.imageUrl && (
             <Image
               source={{uri: product.imageUrl}}
-              style={{width: 160, height: 200}}
+              style={{width: 180, height: 200}}
             />
           )}
         </View>
-        <View style={{marginLeft: 10, alignItems: 'center'}}>
+        <View style={{ alignItems: 'center',marginTop:20}}>
           <View>
             <Text style={styles.nametree}>{product.text}</Text>
           </View>
@@ -73,6 +75,7 @@ const ChitietSP = ({route}) => {
       </View>
       <View style={{alignItems: 'center', marginTop: 16}}>
         <TouchableOpacity
+          onPress={() => navigation.navigate('CartProduct', { product })}
           style={{
             height: 50,
             width: 200,
@@ -109,6 +112,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: 'black',
+    marginTop:10
   },
   nametree: {
     fontSize: 20,

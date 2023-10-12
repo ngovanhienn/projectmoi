@@ -96,7 +96,7 @@
 // });
 
 // export default Listccdb;
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -105,7 +105,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import firebase from '../../../firebase/Firebase';
 import ChitietSP from '../../ChitietSP';
 
@@ -116,7 +116,7 @@ const Listccdb = () => {
   useEffect(() => {
     const ref = firebase.database().ref('ccdb');
 
-    ref.on('value', (snapshot) => {
+    ref.on('value', snapshot => {
       const data = snapshot.val();
       setData(data);
     });
@@ -126,27 +126,31 @@ const Listccdb = () => {
     };
   }, []);
 
-  const handleProductPress = (product) => {
-    navigation.navigate('ChitietSP', { product });
+  const handleProductPress = product => {
+    navigation.navigate('ChitietSP', {product});
   };
 
   return (
     <ScrollView>
       <View style={styles.container}>
         {data ? (
-          Object.keys(data).map((key) => (
-            <View
-              style={{ justifyContent: 'space-evenly' }}
-              key={key}
-            >
+          Object.keys(data).map(key => (
+            <View style={{justifyContent: 'space-evenly'}} key={key}>
               <TouchableOpacity onPress={() => handleProductPress(data[key])}>
-                <View style={{ marginTop: 8 }}>
+                <View style={{marginTop: 8}}>
                   {/* <Text style={styles.text}>{data[key].createdAt}</Text> */}
 
                   {data[key].imageUrl && (
                     <Image
-                      source={{ uri: data[key].imageUrl }}
-                      style={{ height: 180, width: '100%', borderRadius: 8,borderRadius: 8,borderWidth:1,borderColor:'green' }}
+                      source={{uri: data[key].imageUrl}}
+                      style={{
+                        height: 180,
+                        width: '100%',
+                        borderRadius: 8,
+                        // borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: 'green',
+                      }}
                     />
                   )}
                   <View style={styles.dess}>

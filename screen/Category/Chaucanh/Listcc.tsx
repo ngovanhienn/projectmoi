@@ -7,16 +7,15 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import firebase from '../firebase/Firebase';
-import ChitietSP from './ChitietSP';
 import {useNavigation} from '@react-navigation/native';
-
-const Cart = () => {
+import firebase from '../../../firebase/Firebase';
+import ChitietSP from '../../ChitietSP';
+const Listcc = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const ref = firebase.database().ref('messages');
+    const ref = firebase.database().ref('chaucanh');
 
     ref.on('value', snapshot => {
       const data = snapshot.val();
@@ -27,7 +26,6 @@ const Cart = () => {
       ref.off();
     };
   }, []);
-
   const handleProductPress = product => {
     navigation.navigate('ChitietSP', {product});
   };
@@ -37,20 +35,27 @@ const Cart = () => {
       <View style={styles.container}>
         {data ? (
           Object.keys(data).map(key => (
-            <View style={{justifyContent: 'space-evenly'}}>
+            <View style={{justifyContent: 'space-evenly'}} key={key}>
               <TouchableOpacity onPress={() => handleProductPress(data[key])}>
-                <View>
-                  <View key={key}>
-                    <Text style={styles.text}>{data[key].createdAt}</Text>
+                <View style={{marginTop: 8}}>
+                  {/* <Text style={styles.text}>{data[key].createdAt}</Text> */}
 
-                    {data[key].imageUrl && (
-                      <Image
-                        source={{uri: data[key].imageUrl}}
-                        style={{height: 140, width: '100%'}}
-                      />
-                    )}
-                    <View style={styles.dess}>
-                      <Text style={styles.text}>{data[key].text}</Text>
+                  {data[key].imageUrl && (
+                    <Image
+                      source={{uri: data[key].imageUrl}}
+                      style={{
+                        height: 180,
+                        width: '100%',
+                        borderRadius: 8,
+                        borderWidth: 1,
+                        borderColor: 'black',
+                      }}
+                    />
+                  )}
+                  <View style={styles.dess}>
+                    <Text style={styles.text}>{data[key].text}</Text>
+                    <View style={styles.bodertext}>
+                      <Text style={styles.text2}>{data[key].gia} VNĐ</Text>
                     </View>
                   </View>
                 </View>
@@ -71,22 +76,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: 10,
+    backgroundColor: '#FFE4C4',
   },
   text: {
     fontSize: 20,
-    color: '#009933',
+    color: 'yellow',
     textAlign: 'center',
   },
+  text2: {
+    color: '#fff',
+    fontSize: 20,
+    borderTopWidth: 1,
+    borderColor: 'black',
+  },
+  bodertext: {},
   dess: {
-    backgroundColor: '#BBBBBB',
+    backgroundColor: '#CD6839',
     borderRadius: 6,
     padding: 8,
     alignItems: 'center',
     width: 180,
-    height: 60,
+    height: 80,
     justifyContent: 'center',
     marginHorizontal: 7,
   },
 });
 
-export default Cart;
+export default Listcc;

@@ -37,7 +37,7 @@ const Signin = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Sign In</Text>
+        <Text style={styles.title}>Đăng nhập</Text>
       </View>
       <TextInput
         style={styles.input1}
@@ -54,14 +54,14 @@ const Signin = ({navigation}) => {
       />
       <View>
         <TouchableOpacity style={styles.but1} onPress={signUpTestFn}>
-          <Text style={styles.but4}>Login</Text>
+          <Text style={styles.but4}>Đăng nhập</Text>
         </TouchableOpacity>
 
         <Text style={styles.orText}>OR</Text>
 
         <View>
           <TouchableOpacity style={styles.but3} onPress={handleFacebookLogin}>
-            <Text style={styles.but4}>Facebook Login</Text>
+            <Text style={styles.but4}>Đăng nhập bằng Facebook</Text>
           </TouchableOpacity>
         </View>
       </View>

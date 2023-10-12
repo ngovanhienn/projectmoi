@@ -15,12 +15,12 @@ const LandingScreen = ({navigation}) =>  {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.box2}>Hello</Text>
+        <Text style={styles.box2}>Xin chào</Text>
         <View>
           <TouchableOpacity
             style={styles.but1}
             onPress={() => navigation.navigate('Signin')}>
-            <Text style={styles.but2}>Signin</Text>
+            <Text style={styles.but2}>Đăng nhập</Text>
           </TouchableOpacity>
         </View>
 
@@ -28,7 +28,7 @@ const LandingScreen = ({navigation}) =>  {
           <TouchableOpacity
             style={styles.but3}
             onPress={() => navigation.navigate('Signup')}>
-            <Text style={styles.but4}>Sign Up</Text>
+            <Text style={styles.but4}>Đăng ký</Text>
           </TouchableOpacity>
         </View>
       </View>

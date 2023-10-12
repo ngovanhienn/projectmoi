@@ -10,6 +10,7 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+
 const Header = ({navigation}) => {
   return (
     <View>
@@ -37,7 +38,7 @@ const Header = ({navigation}) => {
             <FontAwesome5 name="search" size={12} color="black"></FontAwesome5>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+        <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
           <View style={styles.cart}>
             <Text></Text>
             <FontAwesome5

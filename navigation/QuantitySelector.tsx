@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '800',
 
-    width: 40,
-    height: 50,
+    width: 30,
+    height: 40,
     paddingTop: 8,
   },
   btnSL: {
