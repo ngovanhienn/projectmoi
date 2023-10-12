@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "309174358555",
-    "project_id": "reactnative-58c5b",
-    "storage_bucket": "reactnative-58c5b.appspot.com"
+    "project_number": "750380295040",
+    "project_id": "newproject-c8af3",
+    "storage_bucket": "newproject-c8af3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:309174358555:android:117bdd21375345ce0d9ebe",
+        "mobilesdk_app_id": "1:750380295040:android:cbad3c6caa1720cb5f1765",
         "android_client_info": {
           "package_name": "com.pjcn"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCCbT9pFwRsx7pxEsnmCdHNZcBBmFK-T_Y"
+          "current_key": "AIzaSyDNCJjjpMURz-apu_8aIEQ8A1atfSvS2oU"
         }
       ],
       "services": {

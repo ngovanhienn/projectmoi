@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     height: 68,
   },
   search: {
-    height: 30,
-    width: 120,
+    height: 40,
+    width: 130,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',

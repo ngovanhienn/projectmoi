@@ -19,6 +19,9 @@ import Signup from '../screen/Login/SignupScreen';
 import Cart from '../screen/Cart';
 import Chitietsp from '../screen/ChitietSP';
 import Chitietcbangsgp from '../screen/Detail/Chitietbangsgp';
+import Listccdb from '../screen/Category/Caycanhdeban/Listccdb';
+import CcdbScreen from '../screen/Category/Caycanhdeban/CcdbHome';
+import Listccvp from '../screen/Category/Caycanhvanphong/Listccvp';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +44,10 @@ const AuthStack = () => {
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="ChitietSP" component={Chitietsp} />
         <Stack.Screen name="chitietbangsgp" component={Chitietcbangsgp} />
+           <Stack.Screen name="Listccdb" component={Listccdb} />
+          <Stack.Screen name="CcdbScreen" component={CcdbScreen} />
+          <Stack.Screen name="Listccvp" component={Listccvp} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

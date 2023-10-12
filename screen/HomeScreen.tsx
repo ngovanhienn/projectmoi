@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, Image, ImageBackground, StyleSheet} from 'react-native';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {View, Text, Image, ImageBackground, StyleSheet,ScrollView, TouchableOpacity} from 'react-native';
+
 import Header from './Header';
 import Haydung from '../navigation/Haydung';
+import Cart from './Cart';
 import ListProduce from './ListProduce';
 import CcdbScreen from './Category/Caycanhdeban/CcdbHome';
-import Haydung2 from '../navigation/Haydung2';
 
 const HomeScreen = ({navigation}) => {
   return (
@@ -77,7 +77,10 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <ListProduce navigation={navigation} />
+      <Haydung tile="Sản phẩm nổi bật" />
+      {/* <ListProduce navigation={navigation} /> */}
+      <Cart navigation={navigation} />
+
     </ScrollView>
   );
 };
