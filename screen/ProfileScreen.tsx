@@ -7,7 +7,7 @@ const ProfileScreen = ({navigation}) => {
     <View>
       <View style={{justifyContent: 'space-between'}}>
         <Text style={{fontSize: 25, textAlign: 'center', marginVertical: 20}}>
-          Profile{' '}
+          {' '}
         </Text>
       </View>
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
@@ -20,33 +20,46 @@ const ProfileScreen = ({navigation}) => {
           Hiển Ngô
         </Text>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
+        <View
+          style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 50}}>
+          <Image
+            style={{marginLeft: 20}}
+            source={require('../Image/cart2.png')}
+            style={styles.profile}
+          />
+          <Text style={{marginLeft: 30, fontSize: 18, fontWeight: 'bold'}}>
+            Giỏ hàng
+          </Text>
+        </View>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
         <View
           style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 50}}>
           <Image
             style={{marginLeft: 20}}
-            source={require('../Image/profile.jpg')}
+            source={require('../Image/new.jpg')}
             style={styles.profile}
           />
           <Text style={{marginLeft: 30, fontSize: 18, fontWeight: 'bold'}}>
-            Account Details
+            Tạo tài khoản mới
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Collections')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Signin')}>
         <View
           style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 40}}>
           <Image
             style={{marginLeft: 20, tintColor: 'blue'}}
-            source={require('../Image/profile.jpg')}
+            source={require('../Image/new2.png')}
             style={styles.profile}
           />
           <Text style={{marginLeft: 30, fontSize: 18, fontWeight: 'bold'}}>
-            Collection
+            Đổi tài khoản
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Saved')}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate('Saved')}>
         <View
           style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 40}}>
           <Image
@@ -71,13 +84,13 @@ const ProfileScreen = ({navigation}) => {
             Contact Us
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <View style={{marginTop: 15}}>
         <TouchableOpacity
           style={styles.but1}
           onPress={() => navigation.navigate('Signin')}>
-          <Text style={styles.but2}>Log Out</Text>
+          <Text style={styles.but2}>Đăng xuất</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -101,11 +114,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#20C065',
     color: 'white',
     textAlign: 'center',
+    marginTop:60
   },
   but2: {
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
+    
   },
 });
 

@@ -27,7 +27,7 @@ export default function Signup({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.title1}>
-        <Text style={styles.title}>Create new account</Text>
+        <Text style={styles.title}>Tạo tài khoản mới</Text>
       </View>
 
       <View>

@@ -23,6 +23,8 @@ import Listccdb from '../screen/Category/Caycanhdeban/Listccdb';
 import CcdbScreen from '../screen/Category/Caycanhdeban/CcdbHome';
 import Listccvp from '../screen/Category/Caycanhvanphong/Listccvp';
 import CartProduct from '../screen/CartProduct';
+import Pay from '../screen/Pay';
+import Search from '../screen/Search';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +51,8 @@ const AuthStack = () => {
         <Stack.Screen name="CcdbScreen" component={CcdbScreen} />
         <Stack.Screen name="Listccvp" component={Listccvp} />
         <Stack.Screen name="CartProduct" component={CartProduct} />
+        <Stack.Screen name="Pay" component={Pay} />
+        {/* <Stack.Screen name="Search" component={Search} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -6,6 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  TextInput
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firebase from '../../../firebase/Firebase';
@@ -13,13 +14,15 @@ import ChitietSP from '../../ChitietSP';
 const Listcc = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [originalData, setOriginalData] = useState(null);
   useEffect(() => {
     const ref = firebase.database().ref('chaucanh');
 
     ref.on('value', snapshot => {
       const data = snapshot.val();
       setData(data);
+      setOriginalData(data);
     });
 
     return () => {
@@ -30,8 +33,37 @@ const Listcc = () => {
     navigation.navigate('ChitietSP', {product});
   };
 
+  const handleSearch = () => {
+    const filteredData = Object.values(originalData).filter(product => {
+      return product.text.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setData(filteredData); // Sử dụng biến originalData để lọc sản phẩm
+  };
+
+  const handleShowAll = () => {
+    setData(originalData);
+  };
+
+
   return (
     <ScrollView>
+      <View
+        style={{
+          backgroundColor: 'white',
+          borderWidth: 2,
+          borderColor: 'black',
+        }}>
+        <TextInput
+          placeholder="Nhập từ khóa tìm kiếm"
+          onChangeText={text => setSearchTerm(text)}
+        />
+      </View>
+      <TouchableOpacity style={styles.btntim} onPress={() => handleSearch()}>
+        <Text style={styles.tim}>Tìm kiếm</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.btntim} onPress={() => handleShowAll()}>
+        <Text style={styles.tim}>Hiển thị tất cả</Text>
+      </TouchableOpacity>
       <View style={styles.container}>
         {data ? (
           Object.keys(data).map(key => (
@@ -71,6 +103,22 @@ const Listcc = () => {
 };
 
 const styles = StyleSheet.create({
+  timkiem: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginVertical: 5,
+  },
+  btntim: {
+    borderLeftWidth: 1,
+  },
+  tim: {
+    color: 'white',
+    fontSize: 18,
+    // alignItems: 'center'
+  },
   container: {
     flex: 1,
     flexDirection: 'row',

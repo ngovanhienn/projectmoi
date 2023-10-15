@@ -10,7 +10,6 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-
 const Header = ({navigation}) => {
   return (
     <View>
@@ -32,13 +31,13 @@ const Header = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <View style={styles.search}>
             <Text style={styles.searchButton}>Tìm kiếm</Text>
             <FontAwesome5 name="search" size={12} color="black"></FontAwesome5>
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
           <View style={styles.cart}>
             <Text></Text>
             <FontAwesome5
@@ -46,7 +45,7 @@ const Header = ({navigation}) => {
               size={20}
               color="#EEE8AA"></FontAwesome5>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <View style={{marginRight: 10}}>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
@@ -90,3 +89,4 @@ const styles = StyleSheet.create({
 });
 
 export default Header;
+

@@ -15,6 +15,7 @@ import CcvpScreen from '../screen/Category/Caycanhvanphong/CcvpScreen';
 import SdScreen from '../screen/Category/Senda/SdScreen';
 import CcScreen from '../screen/Category/Chaucanh/CcScreen';
 import Signin from '../screen/Login/Signin';
+import CartProduct from '../screen/CartProduct';
 
 const Drawer = createDrawerNavigator();
 
@@ -72,6 +73,15 @@ const AppStack = ({navigation}) => {
         options={{
           drawerIcon: ({color}) => (
             <Ionicons name="beaker-outline" size={22} color={color} />
+          ),
+        }}
+      />
+       <Drawer.Screen
+        name="giỏ hàng"
+        component={CartProduct}
+        options={{
+          drawerIcon: ({color}) => (
+            <Ionicons name="cart-outline" size={22} color={color} />
           ),
         }}
       />
