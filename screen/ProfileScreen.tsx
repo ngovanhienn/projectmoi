@@ -1,25 +1,28 @@
 import React from 'react';
 import {View, Text, ImageBackground, StyleSheet, Image,TouchableOpacity} from 'react-native';
 import Header from './Header';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const ProfileScreen = ({navigation}) => {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={{justifyContent: 'space-between'}}>
-        <Text style={{fontSize: 25, textAlign: 'center', marginVertical: 20}}>
+        {/* <Text style={{fontSize: 25, textAlign: 'center', marginVertical: 20}}>
           {' '}
-        </Text>
+        </Text> */}
       </View>
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.header}>
         <Image
           source={require('../Image/profile.jpg')}
           // style={styles.profile}
-          style={{height:100,width:100, borderRadius:50}}
+          style={{height:100,width:100, borderRadius:50,marginTop:16}}
         />
-        <Text style={{fontSize: 30, fontWeight:900, marginTop: 10}}>
+        <Text style={{fontSize: 30, fontWeight:'500',color:'#333', margin: 10}}>
           Hiển Ngô
         </Text>
       </View>
+      <View style={styles.item}>
+
       <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
         <View
           style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 50}}>
@@ -58,33 +61,9 @@ const ProfileScreen = ({navigation}) => {
             Đổi tài khoản
           </Text>
         </View>
+        {/* <FontAwesome5 name="star-of-life" size={20} color="black"></FontAwesome5> */}
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => navigation.navigate('Saved')}>
-        <View
-          style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 40}}>
-          <Image
-            style={{marginLeft: 20}}
-            source={require('../Image/profile.jpg')}
-            style={styles.profile}
-          />
-          <Text style={{marginLeft: 30, fontSize: 18, fontWeight: 'bold'}}>
-            Saved
-          </Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <View
-          style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 40}}>
-          <Image
-            style={{marginLeft: 20}}
-            source={require('../Image/profile.jpg')}
-            style={styles.profile}
-          />
-          <Text style={{marginLeft: 30, fontSize: 18, fontWeight: 'bold'}}>
-            Contact Us
-          </Text>
-        </View>
-      </TouchableOpacity> */}
+
 
       <View style={{marginTop: 15}}>
         <TouchableOpacity
@@ -93,20 +72,27 @@ const ProfileScreen = ({navigation}) => {
           <Text style={styles.but2}>Đăng xuất</Text>
         </TouchableOpacity>
       </View>
+      </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    borderTopWidth: 1,
-    borderTopColor: 'black',
+    // borderTopWidth: 1,
+    // borderTopColor: 'black',
+    flex:1,
   },
   profile: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
+  },
+  header :{
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor:'#33CC00'
   },
   but1: {
-    width: 330,
+    // width: 330,
     borderRadius: 10,
     height: 50,
     margin: 30,

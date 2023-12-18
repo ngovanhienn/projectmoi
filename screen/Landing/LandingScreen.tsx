@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   box1: {
-    color: '#5EA33A',
+    color: '#33CC00',
     marginTop: 30,
     fontSize: 18,
     alignItems: 'center',
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   box2: {
-    color: '#20C065',
+    color: '#33CC00',
     textAlign: 'center',
     fontSize: 30,
     alignItems: 'center',
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     margin: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#20C065',
+    backgroundColor: '#33CC00',
     marginBottom: 10,
     color: 'white',
   },
@@ -90,14 +90,14 @@ const styles = StyleSheet.create({
     marginBottom: 150,
     color: 'white',
     borderWidth: 1,
-    borderColor: '#20C065',
+    borderColor: '#33CC00',
   },
   but2: {
     color: 'white',
     fontSize: 20,
   },
   but4: {
-    color: '#5EA33A',
+    color: '#33CC00',
     fontSize: 20,
   },
 });

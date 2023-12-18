@@ -1,4 +1,4 @@
-import {View, Text, ImageBackground, Image} from 'react-native';
+import {View, Text, ImageBackground, Image,TouchableOpacity} from 'react-native';
 import React from 'react';
 import {StyledText} from 'react-native-styled-text';
 import {
@@ -7,9 +7,10 @@ import {
 } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
 
 const CustomDrawer = props => {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -50,13 +51,15 @@ const CustomDrawer = props => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        <TouchableOpacity onPress={() => navigation.navigate('Signin')} style={{paddingVertical: 15}}>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
               marginLeft: -5,
-            }}>
+            }} 
+            
+            >
             <Ionicons name="exit-outline" size={22} />
             <Text style={{fontSize: 16, fontWeight: 'bold', marginLeft: 5}}>
               Sign Out

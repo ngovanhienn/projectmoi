@@ -18,17 +18,16 @@ import Listccdb from './screen/Category/Caycanhdeban/Listccdb';
 import CcdbScreen from './screen/Category/Caycanhdeban/CcdbHome';
 import SearchScreen from './screen/Search';
 import CartProduct from './screen/CartProduct';
+import Pay from './screen/Pay';
+import ProfileScreen from './screen/ProfileScreen';
 const App = () => {
-  return  <AuthStack />;
-  // <CartProduct />
-  <AuthStack />;
-  // <SearchScreen />;
-
-  // <CcdbScreen />;
-  // <Listccdb />;
-
+  return  <ProfileScreen/>
+  // <AuthStack />;
   
+  // <Pay/>;
  
+  // <CartProduct />
+  // <AuthStack />;
 };
 
 export default App;

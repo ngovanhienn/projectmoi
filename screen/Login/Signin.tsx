@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Image,
+  ImageBackground,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
@@ -13,13 +15,6 @@ const Signin = ({navigation}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const handleLogin = () => {
-  //   if (username === 'h' && password === '123') {
-  //     navigation.navigate('Home');
-  //   } else {
-  //     alert('vui lòng đăng nhập lại');
-  //   }
-  // };
   const signUpTestFn = () => {
     auth()
       .signInWithEmailAndPassword(username, password)
@@ -36,32 +31,50 @@ const Signin = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <View style={{justifyContent:'center'}}>
+
       <View>
-        <Text style={styles.title}>Đăng nhập</Text>
+        <ImageBackground source={require('../../Image/senda3.jpg')} style={styles.logo} />
       </View>
-      <TextInput
-        style={styles.input1}
-        placeholder="user name"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={setPassword}
-      />
-      <View>
-        <TouchableOpacity style={styles.but1} onPress={signUpTestFn}>
-          <Text style={styles.but4}>Đăng nhập</Text>
-        </TouchableOpacity>
 
-        <Text style={styles.orText}>OR</Text>
-
+      <View style={styles.title1}>
         <View>
-          <TouchableOpacity style={styles.but3} onPress={handleFacebookLogin}>
-            <Text style={styles.but4}>Đăng nhập bằng Facebook</Text>
+          <Text style={styles.title}>Đăng nhập</Text>
+        </View>
+
+        <TextInput
+          style={styles.input1}
+          placeholder="user name"
+          value={username}
+          onChangeText={setUsername}
+        />
+        <TextInput
+          style={styles.input1}
+          placeholder="Password"
+          secureTextEntry={true}
+          value={password}
+          onChangeText={setPassword}
+        />
+      </View>
+        <View style={{marginLeft:238,marginTop:10,}}>
+          <TouchableOpacity >
+            <Text style={styles.new}>Quên mật khẩu</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.but1} onPress={signUpTestFn}>
+            <Text style={styles.but4}>Đăng nhập</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.orText}></Text>
+
+        <View style={styles.signup}>
+          <TouchableOpacity style={styles.but3}>
+            <Text style={styles.but5}>Chưa có tài khoản?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity  onPress={() => navigation.navigate('Signup')} style={styles.but3}>
+            <Text style={styles.new}>Đăng ký</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -71,22 +84,27 @@ const Signin = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex:1,
+    alignItems: 'center',
+    backgroundColor: 'white',
+      alignItems: 'flex-start',
+  },
+  logo: {
+    width: 400,
+    height: 200,
+    resizeMode: 'stretch',
+  },
+  title1: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
   },
-
   title: {
-    color: '#20C065',
+    color: '#303636',
     fontSize: 28,
-    // fontWeight: 'bold',
-    marginBottom: 50,
-    paddingRight: 250,
   },
   input1: {
     height: 50,
-    width: '80%',
+    width: 350,
     marginTop: 20,
     borderWidth: 1,
     borderRadius: 20,
@@ -105,25 +123,27 @@ const styles = StyleSheet.create({
     width: 300,
     borderRadius: 30,
     height: 50,
-    margin: 20,
-    marginTop: 30,
+    // margin: 20,
+    marginLeft:50,
+    marginTop: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#20C065',
+    backgroundColor: '#33CC00',
     color: 'white',
+    borderColor:'#777',
+    borderWidth:1
   },
   but3: {
-    width: 300,
-    borderRadius: 30,
-    height: 50,
-    margin: 20,
+    // width: 300,
+    // borderRadius: 30,
+    // height: 50,
+    // margin: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#3B5998',
-    marginBottom: 70,
-    color: 'white',
-    borderWidth: 0.3,
-    borderColor: 'red',
+    marginBottom: 30,
+    color: '#777',
+    // borderWidth: 0.3,
+    // borderColor: 'red',
   },
   but2: {
     color: 'white',
@@ -133,6 +153,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  but5:{
+    color:'#444',
+    fontSize:18
+  },
+
+  signup:{
+    flexDirection:'row',
+    justifyContent:'center'
+  },
+  new:{color:'#666',fontSize:18,color:'#EEAD0E',fontWeight:'600'},
   orText: {
     marginVertical: 30,
     textAlign: 'center',

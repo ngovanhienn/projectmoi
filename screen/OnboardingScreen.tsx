@@ -1,16 +1,4 @@
-// import { View, Text, Button } from 'react-native'
-// import React from 'react'
 
-// const OnboardingScreen = ({navigation}) => {
-//   return (
-//     <View>
-//       <Text>onboardingScreen</Text>
-//       <Button title='click' onPress={() => navigation.navigate('Chitietccvp')}/>
-//     </View>
-//   )
-// }
-
-// export default OnboardingScreen
 import {StatusBar} from 'expo-status-bar';
 import {
   StyleSheet,
@@ -64,7 +52,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   box1: {
-    color: '#5EA33A',
+    color: '#33CC00',
     marginTop: 30,
     fontSize: 18,
     alignItems: 'center',
@@ -72,7 +60,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   box2: {
-    color: '#20C065',
+    color: '#33CC00',
     textAlign: 'center',
     fontSize: 30,
     alignItems: 'center',

@@ -37,28 +37,26 @@ const Cart = () => {
       <View style={styles.container}>
         {data ? (
           Object.keys(data).map(key => (
-            <View style={{justifyContent: 'space-evenly'}}>
+            <View style={{justifyContent: 'space-evenly'}} key={key}>
               <TouchableOpacity onPress={() => handleProductPress(data[key])}>
                 <View>
-                  <View key={key}>
-                    <Text style={styles.text}>{data[key].createdAt}</Text>
+                  <Text style={styles.text}>{data[key].createdAt}</Text>
 
-                    {data[key].imageUrl && (
-                      <Image
-                        source={{uri: data[key].imageUrl}}
-                        style={{height: 140, width: '100%'}}
-                      />
-                    )}
-                    <View style={styles.dess}>
-                      <Text style={styles.text}>{data[key].text}</Text>
-                    </View>
+                  {data[key].imageUrl && (
+                    <Image
+                      source={{uri: data[key].imageUrl}}
+                      style={{height: 140, width: '100%'}}
+                    />
+                  )}
+                  <View style={styles.dess}>
+                    <Text style={styles.text}>{data[key].text}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
             </View>
           ))
         ) : (
-          <Text>Loading...</Text>
+          <Text>Loading....</Text>
         )}
       </View>
     </ScrollView>

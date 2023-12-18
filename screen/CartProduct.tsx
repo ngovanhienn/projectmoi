@@ -1,62 +1,4 @@
-// import {View, Text, ScrollView, Image, TouchableOpacity} from 'react-native';
-// import Drawer from '../navigation/Drawer';
-// import React, { useState } from 'react';
-// import { CheckBox } from 'react-native-elements'
-// import QuantitySelector from '../navigation/QuantitySelector';
-// import Navigation from '../Navigation';
-// import { useNavigation } from '@react-navigation/native';
-// const CartProduct = ({route}) => {
-//   const navigation = useNavigation();
-//   const {product} = route.params;
-//   const [isChecked, setIsChecked] = useState(false);
-//   return (
-//     <View>
-//       <View style={{height: 60, width: '100%', backgroundColor: '#00B2EE'}}>
-//         <Text
-//           style={{
-//             textAlign: 'center',
-//             marginTop: 10,
-//             fontSize: 30,
-//             // fontWeight:,
-//             color: 'white',
-//           }}>
-//           {' '}
-//           GIỎ HÀNG
-//         </Text>
-//       </View>
-//       <ScrollView>
-//         <View style={{flexDirection:'row', marginTop:20,marginLeft:5}}>
-//         <CheckBox
-//             checked={isChecked}
-//             onPress={() => setIsChecked(!isChecked)}
-//           />
-//           <View>
-//             <Image
-//               source={{uri: product.imageUrl}}
-//               style={{width: 100, height: 100}}
-//             />
-//           </View>
-//           <View style={{alignItems:'center'}}>
-//             <Text style={{marginLeft:10, fontSize:23,color:'black'}}>{product.text}</Text>
-//             <Text style={{color:'red', marginTop:20,fontSize:20}}>{product.gia} VNĐ</Text>
 
-//           </View>
-
-//         </View>
-
-//       </ScrollView>
-//       <TouchableOpacity style={{alignItems:'center', marginTop:40}} onPress={() => navigation.navigate('Pay')}>
-
-//        <View style={{height:68, width:140,backgroundColor:'red',borderRadius:8,justifyContent:'center',}}>
-
-//          <Text style={{textAlign:'center', color:'white',fontSize:26}}>Mua hàng</Text>
-//         </View>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
-// export default CartProduct;
 
 import React, {useState, useEffect} from 'react';
 import {
@@ -69,6 +11,8 @@ import {
   Alert,
 } from 'react-native';
 // import firebase from '../../../firebase/Firebase';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useNavigation} from '@react-navigation/native';
 import firebase from '../firebase/Firebase';
 import Drawer from '../navigation/Drawer';
@@ -76,7 +20,7 @@ const CartProduct = () => {
   const [products, setProducts] = useState([]);
   const navigation = useNavigation();
   useEffect(() => {
-    // Lắng nghe các thay đổi đối với thông tin sản phẩm trong giỏ hàng
+    
     firebase
       .database()
       .ref('giohangcaycanh')
@@ -96,7 +40,11 @@ const CartProduct = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{flexDirection:'row'}}> 
       <Drawer tile="GIỎ HÀNG" />
+      <Ionicons name="cart" size={32} style={{margin:10}} />
+      
+      </View>
       <ScrollView>
         {products.map((product, index) => (
           <View key={index} style={styles.product}>
@@ -122,15 +70,9 @@ const CartProduct = () => {
       </View>
       <View style={styles.thanhtoan}>
         <TouchableOpacity
-          onPress={() =>
-            Alert.alert('Thanh toán thành công', 'Cảm ơn bạn đã đặt hàng', [
-              {text: 'Cancel'},
-              {
-                text: 'OK',
-                onPress: () => navigation.navigate('Home'),
-                style: 'default',
-              },
-            ])
+          onPress={ () => navigation.navigate('Pay')
+          
+            
           }>
           <Text style={styles.totalText2}>Thanh Toán</Text>
         </TouchableOpacity>
