@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import firebase from '../../../firebase/Firebase';
-import ChitietSP from '../../ChitietSP';
+import ChitietSP from '../../ChitietSp/ChitietSP';
 const Listcc = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);

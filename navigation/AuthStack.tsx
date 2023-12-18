@@ -17,7 +17,7 @@ import Dungculamvuon from '../screen/Category/Dungcu/Dungculamvuon';
 import LandingScreen from '../screen/Landing/LandingScreen';
 import Signup from '../screen/Login/SignupScreen';
 import Cart from '../screen/Cart';
-import Chitietsp from '../screen/ChitietSP';
+import ChitietSP from '../screen/ChitietSp/ChitietSP';
 import Chitietcbangsgp from '../screen/Detail/Chitietbangsgp';
 import Listccdb from '../screen/Category/Caycanhdeban/Listccdb';
 import CcdbScreen from '../screen/Category/Caycanhdeban/CcdbHome';
@@ -25,6 +25,7 @@ import Listccvp from '../screen/Category/Caycanhvanphong/Listccvp';
 import CartProduct from '../screen/CartProduct';
 import Pay from '../screen/Pay';
 import Search from '../screen/Search';
+import Info from '../screen/profileafter/Info';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,13 +46,14 @@ const AuthStack = () => {
         <Stack.Screen name="Danhmuc" component={Danhmuc} />
         <Stack.Screen name="Dungcu" component={Dungculamvuon} />
         <Stack.Screen name="Cart" component={Cart} />
-        <Stack.Screen name="ChitietSP" component={Chitietsp} />
         <Stack.Screen name="chitietbangsgp" component={Chitietcbangsgp} />
         <Stack.Screen name="Listccdb" component={Listccdb} />
+        {/* <Stack.Screen name="ChitietSP" component={ChitietSP} /> */}
         <Stack.Screen name="CcdbScreen" component={CcdbScreen} />
         <Stack.Screen name="Listccvp" component={Listccvp} />
         <Stack.Screen name="CartProduct" component={CartProduct} />
         <Stack.Screen name="Pay" component={Pay} />
+        <Stack.Screen name="Info" component={Info} />
         {/* <Stack.Screen name="Search" component={Search} /> */}
       </Stack.Navigator>
     </NavigationContainer>

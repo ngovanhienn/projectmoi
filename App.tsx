@@ -21,8 +21,9 @@ import CartProduct from './screen/CartProduct';
 import Pay from './screen/Pay';
 import ProfileScreen from './screen/ProfileScreen';
 const App = () => {
-  return  <ProfileScreen/>
-  // <AuthStack />;
+  return  <AuthStack/>
+  // <ProfileScreen/>
+  
   
   // <Pay/>;
  

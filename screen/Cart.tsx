@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import firebase from '../firebase/Firebase';
-import ChitietSP from './ChitietSP';
+import ChitietSP from './ChitietSp/ChitietSP';
 import {useNavigation} from '@react-navigation/native';
 
 const Cart = () => {
