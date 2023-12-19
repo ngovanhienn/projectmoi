@@ -1,18 +1,3 @@
-// import { View, Text } from 'react-native'
-// import React from 'react'
-// import {useNavigation} from '@react-navigation/native';
-
-// const ChitietSP = (Navigation) => {
-    
-//   return (
-    
-//     <View>
-//       <Text>ChitietSP</Text>
-//     </View>
-//   )
-// }
-
-// export default ChitietSP
 import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
@@ -31,15 +16,16 @@ import {DocumentData} from 'firebase/firestore';
 import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import {useRoute} from '@react-navigation/native';
-
+import firebase from '../../firebase/Firebase';
 import styles from './Style';
 import CommentScreen from './Comment/Comment';
 import {AppContext} from '../../components/AppContext/AppContext';
 // import DeletedComment from './Comment/Deletecomment';
 import Header2 from '../../components/Head/Header';
+
 const ChitietSP = ({route, fetchUpdate}: any) => {
   const {params} = useRoute();
-  const {idProduct, setIdproduct} = useContext(AppContext);
+  const {idProduct, setIdproduct, emailname} = useContext(AppContext);
   const navigation = useNavigation();
   const {product} = route.params;
 
@@ -49,12 +35,13 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedButton, setSelectedButton] = useState('mota');
   const [proid, setProid] = useState('');
+  // const [uselike, setUserlike] = useState('');
   const [selectedFavories, setSelectedFavories] = useState(!product.favories);
   const [refreshingComment, setRefreshingComment] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
-  const [clickLike, setClickLike] = useState(false)
-  const [numberLike, setNumberLike] = useState(0)
-
+  // const [clickLike, setClickLike] = useState(false);
+  const [numberLike, setNumberLike] = useState(0);
+  const [data, setData] = useState([]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
@@ -72,34 +59,35 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
 
   /*  Hiển thị sanpham*/
 
-  const fetchData = async () => {
-    const snapshot = await firestore()
-      .collection('Product')
-      .where('category', '==', product.category)
-      .get();
+  useEffect(() => {
+    const ref = firebase.database().ref('ccdb');
 
-    // const items = snapshot.docs.map(doc => doc.data());
-    const items = snapshot.docs.map(doc => ({
-      ...doc.data(),
-      key: doc.id,
-    }));
-    // {products.map(((pro)=>(setProid(pro.key)))}
+    ref.on('value', snapshot => {
+      const data = snapshot.val();
+      setData(data);
+      console.log('data: ,', data);
+      // setOriginalData(data);
+    });
 
-    // {products.map((pr=>(console.log('Favories là: ', pr.favories))))}
-    setProducts(items);
-  };
+    return () => {
+      ref.off();
+    };
+  }, []);
   const fetchComment = async () => {
     const snapshot = await firestore()
       .collection('comments')
       .where('productId', '==', product.key)
       .orderBy('timestamp', 'desc')
       .get();
-
     // const items = snapshot.docs.map((doc) => (doc.data()));
     const items = snapshot.docs.map(doc => ({
       ...doc.data(),
       id: doc.id,
+      // hasLiked: false,
     }));
+    {
+      comments.map(cm => setUserlike(cm.usernamelike));
+    }
     setComments(items);
   };
   const deleteComments = async (commentKey: string) => {
@@ -114,7 +102,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
     }
   };
   useEffect(() => {
-    fetchData();
+    // fetchData();
     fetchComment();
     setIdproduct(product.key);
     // console.log('category chitiet: ', product.category);
@@ -188,7 +176,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
       .then(() => {
         console.log('Favories updated!');
         // fetchUpdate;
-        
+
         // setSelectedFavories(!product.favories);
         console.log('favories: ', product.favories);
       })
@@ -202,20 +190,22 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
   //them vao gio hang
   const addToCart = async () => {
     const querySnapshot = await firestore()
-      .collection('Cart')
-      .where('name', '==', product.name)
+      .collection('ccdb')
+      .where('text', '==', product.text)
+      .where('image', '==', product.imageUrl)
       .get();
 
     if (querySnapshot.empty) {
       // Tạo tài liệu mới nếu không tìm thấy sản phẩm trong giỏ hàng
       const cartItem = {
-        name: product.name,
+        name: product.text,
         quantity: quantity,
         price: product.price * quantity,
-        image: product.image,
+        imageUrl: product.imageUrl,
+        // username: emailname,
       };
 
-      await firestore().collection('Cart').add(cartItem);
+      await firestore().collection('ccdb').add(cartItem);
       Alert.alert('Sản phẩm đã được thêm vào giỏ hàng');
     } else {
       // Cập nhật tài liệu hiện có nếu sản phẩm đã tồn tại trong giỏ hàng
@@ -233,21 +223,81 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
     }
   };
 
-  const handleLike = () => {
-    setClickLike(!clickLike)
-    if(clickLike == true){
-      setNumberLike(pre => pre+1)
-    }else{
-      setNumberLike(pre => pre-1)
+  // const handleLike = () => {
+  //   if(!clickLike){
+  //     setNumberLike(numberLike+1)
+  //   }else{
+  //     setNumberLike(numberLike-1)
+  //   }
+  //   setClickLike(!clickLike)
+  // }
+  const handleLikeComment = async commentID => {
+    try {
+      const commentRef = await firestore()
+        .collection('comments')
+        .where('usernamelike', '==', emailname)
+        .get();
+      // const items = commentRef.docs.map(doc => ({
+      //   ...doc.data(),
+      //   id: doc.id,
+      //   userlike: doc.data().usernamelike,
+      //   // hasLiked: false,
+      // }));
+      if (commentRef.empty) {
+        //   commentRef.update({
+        //   // usernamelike: emailname,
+        //   likes: !clickLike
+        // });
+        // const updatedLike = existingLike.likes + 1;
+        // await docRef.update({
+        //   likes: updatedLike,
+
+        //   // price: updatedPrice,
+        // });
+        // const commentlike = {
+        //   likes: numberLike+1
+        // };
+        // const docRef = commentRef.docs[0].ref;
+        // const existingLike = commentRef.docs[0].data();
+        // const updatedLike = [...existingLike.usernamelike, emailname]
+        await firestore()
+          .collection('comment')
+          .doc(commentID)
+          .update({
+            likes: numberLike + 1,
+            // usernamelike: [...uselike, emailname]
+          });
+        Alert.alert('Like Okokok');
+      } else {
+        const docRef = commentRef.docs[0].ref;
+        const existingLike = commentRef.docs[0].data();
+
+        const updatedLike = existingLike.likes - 1;
+        await docRef.update({
+          likes: updatedLike,
+          // price: updatedPrice,
+        });
+        Alert.alert('Bỏ like');
+      }
+
+      // setClickLike(!clickLike)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
   return (
     <View style={styles.container}>
-      <Header2 navigation={navigation} />
+      <Header2
+        navigation={navigation}
+        source={require('../../Image/cart.png')}
+        trangcon="Cart"
+        nd={undefined}
+      />
       {/* <Image source={{ uri: product.image }} style={{ width: 200, height: 200 }} /> */}
       <View style={styles.img}>
         <ImageBackground
-          source={{uri: product.image}}
+          source={{uri: product.imageUrl}}
           style={styles.imgbackground}>
           {product.giamgia != 0 && (
             <Text style={styles.textgiamgia}>Giảm {product.giamgia} %</Text>
@@ -255,7 +305,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
         </ImageBackground>
 
         <View style={styles.info}>
-          <Text style={styles.tensp}>{product.name}</Text>
+          <Text style={styles.tensp}>{product.text}</Text>
           <View style={styles.soluong}>
             <TouchableOpacity onPress={decreaseQuantity} style={styles.btnSL}>
               <Text style={[styles.textSL1, {fontSize: 28, color: 'black'}]}>
@@ -273,7 +323,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
           </View>
           {product.giamgia != 0 ? (
             <View style={styles.giamgia}>
-              <Text style={styles.giagoc}>Giá từ: {product.giagoc}</Text>
+              <Text style={styles.giagoc}>Giá từ: {product.gia}</Text>
               <Text style={styles.giaban}>Còn: {product.price}</Text>
             </View>
           ) : (
@@ -325,9 +375,9 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                   styles.motatext,
                   showFullDescription ? {height: 'auto'} : {height: 180},
                 ]}>
-                {product.description}
+                {product.mota}
               </Text>
-              {product.description.length > 200 && (
+              {product.mota.length > 150 && (
                 <TouchableOpacity onPress={handleToggleShowFullDescription}>
                   <Text style={styles.viewMoreText}>
                     {showFullDescription ? 'Ẩn bớt' : 'Xem thêm'}
@@ -336,14 +386,19 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
               )}
             </View>
 
-            <View>
-              <Text style={{fontSize: 20, color: 'black', fontWeight: '400'}}>
+            <View style={{width: '100%', height: 200, backgroundColor: 'blue'}}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  color: 'black',
+                  fontWeight: '400',
+                  backgroundColor: '#fff',
+                }}>
                 Sản phẩm tương tự
               </Text>
               {/**hiển thị sản phẩm tương tự */}
-
               <FlatList
-                data={products}
+                data={data}
                 // data={showAllSimilarProducts ? products : products.slice(0, 5)}
                 horizontal={true}
                 // keyExtractor={item => item.id}
@@ -353,7 +408,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                     style={styles.sptuongtu}
                     onPress={() => handleProductPress(item)}>
                     <Image
-                      source={{uri: item.image}}
+                      source={{uri: item.imageUrl}}
                       style={styles.imgtuongtu}
                     />
                     <Text
@@ -361,46 +416,32 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                         styles.tentuongtu,
                         {marginVertical: 5, height: 36},
                       ]}>
-                      {item.name}
+                      {item.text}
                     </Text>
                     <Text style={styles.tentuongtu}>Giá: {item.price}</Text>
                   </TouchableOpacity>
                 )}
               />
+
+              {/* {data.map(((datas,index)=> (
+                <Text key={index}>{datas.text}</Text>
+              )))} */}
+              {/* {data && Array.isArray(data) && data.map((datas, index) => (
+  <Text key={index}>{datas.text}</Text>
+))} */}
               {/* ---------------------------------------- */}
             </View>
           </ScrollView>
           <View style={styles.dathang}>
             <TouchableOpacity style={styles.cart} onPress={addToCart}>
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderWidth: 1,
-                  borderRadius: 50,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#fff',
-                }}>
-                <Image
-                  source={require('../../Image/cart.png')}
-                  style={styles.imgcart}
-                />
-              </View>
-
-              <Text style={{fontSize: 18, color: '#fff'}}>
+              <Text style={{fontSize: 18, color: 'green'}}>
                 Thêm vào giỏ hàng
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.tim}
               // onPress={() => UpdateFavories(product.key)}>
-              onPress={UpdateFavories}>
-              <Image
-                source={require('../../Image/cart.png')}
-                style={styles.imgtim}
-              />
-            </TouchableOpacity>
+              onPress={UpdateFavories}></TouchableOpacity>
           </View>
         </View>
       ) : (
@@ -421,7 +462,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
               />
             )}
           /> */}
-          <CommentScreen fetchComment={fetchComment()}/>
+          <CommentScreen fetchComment={fetchComment()} />
           <ScrollView
             refreshControl={
               <RefreshControl
@@ -438,20 +479,19 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                 />
                 <View>
                   <View style={styles.noidung}>
-                  <View>
-                    
-                    {cm.username == '' ? (
-                      <Text style={styles.name}>Người dùng</Text>
-                    ) : (
-                      
-                      <Text style={styles.name}> {cm.username} </Text>
-                    )}
+                    <View>
+                      {cm.username == '' ? (
+                        <Text style={styles.name}>Người dùng</Text>
+                      ) : (
+                        <Text style={styles.name}> {cm.username} </Text>
+                      )}
 
-                    <Text style={[styles.name, {fontSize: 14, color: 'grey'}]}>
-                      {moment(cm.timestamp.toDate()).format('DD/MM/YYYY')}
-                    </Text>
+                      <Text
+                        style={[styles.name, {fontSize: 14, color: 'grey'}]}>
+                        {moment(cm.timestamp.toDate()).format('DD/MM/YYYY')}
+                      </Text>
                     </View>
-                    
+
                     {/* <DeletedComment id={cm.key} productkey={product.key}/> */}
                     <TouchableOpacity
                       onPress={() =>
@@ -476,22 +516,30 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                   </View>
                   {/* Nội dung comment */}
                   <Text style={styles.content}> {cm.content} </Text>
-                  <View style={{flexDirection:'row', marginTop: 5}}>
-                  <TouchableOpacity onPress={handleLike}>
-                  {clickLike == false ? (
-                      <Image 
-                      source={require('../../Image/cart.png')}
-                      style={{width: 25, height: 25, marginRight: 5}}
-                    />
-                  ):(
-                  <Image 
-                      source={require('../../Image/cart.png')}
-                      style={{width: 25, height: 25, marginRight: 5}}
-                    />
-                  )}
-                    
+                  <View style={{flexDirection: 'row', marginTop: 5}}>
+                    <TouchableOpacity onPress={() => handleLikeComment(cm.key)}>
+                      {/* <TouchableOpacity onPress={handleLikeComment}> */}
+
+                      {!clickLike ? (
+                        <Image
+                          source={require('../../Image/cart.png')}
+                          style={{width: 25, height: 25, marginRight: 5}}
+                        />
+                      ) : (
+                        <Image
+                          source={require('../../Image/cart.png')}
+                          style={{width: 25, height: 25, marginRight: 5}}
+                        />
+                      )}
                     </TouchableOpacity>
-                    <Text style={{fontSize: 18}}>0</Text>
+                    {/* <Text style={{fontSize: 18}}> {numberLike} </Text> */}
+                    <Text style={{fontSize: 18}}> {cm.likes} </Text>
+                    {/* <Text style={{fontSize: 18}}> {cm.usernamelike} </Text> */}
+                    {cm.usernamelike == '' ? (
+                      <Text style={styles.name}>Người dùng</Text>
+                    ) : (
+                      <Text style={styles.name}> {cm.usernamelike} </Text>
+                    )}
                   </View>
                 </View>
               </View>

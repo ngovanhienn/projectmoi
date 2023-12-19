@@ -14,30 +14,27 @@ export default function Header2({navigation}) {
     <View
       style={{
         flexDirection: 'row',
-        marginBottom: 10,
+        // marginBottom: ,
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
+        // marginTop:30,
       }}>
       <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
         {/* <Ionicons
                     name='chevron-back'
                     size={37}>
                 </Ionicons> */}
-        <Text style={{fontSize: 18, color: '#000'}}>Trở lại</Text>
+        <Text style={{fontSize: 18, color: '#000',marginLeft:10}}>Trở lại</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.back}
-        onPress={() => navigation.navigate('Cart')}>
-        {/* <Ionicons
-                    name='chevron-back'
-                    size={37}>
-                </Ionicons> */}
-        {/* <Text style={{fontSize: 18, color: '#000'}}>Trở lại</Text> */}
+        onPress={() => navigation.navigate('CartProduct')}>
+       
         <Image
           source={require('../../Image/cart.png')}
-          style={{width: 30, height: 30}}
+          style={{width: 40, height: 40}}
         />
       </TouchableOpacity>
 

@@ -48,7 +48,7 @@ const AuthStack = () => {
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="chitietbangsgp" component={Chitietcbangsgp} />
         <Stack.Screen name="Listccdb" component={Listccdb} />
-        {/* <Stack.Screen name="ChitietSP" component={ChitietSP} /> */}
+        <Stack.Screen name="ChitietSP" component={ChitietSP} />
         <Stack.Screen name="CcdbScreen" component={CcdbScreen} />
         <Stack.Screen name="Listccvp" component={Listccvp} />
         <Stack.Screen name="CartProduct" component={CartProduct} />
