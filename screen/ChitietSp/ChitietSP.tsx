@@ -65,7 +65,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
     ref.on('value', snapshot => {
       const data = snapshot.val();
       setData(data);
-      console.log('data: ,', data);
+      // console.log('data: ,', data);
       // setOriginalData(data);
     });
 
@@ -73,6 +73,8 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
       ref.off();
     };
   }, []);
+
+
   const fetchComment = async () => {
     const snapshot = await firestore()
       .collection('comments')
@@ -103,10 +105,11 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
   };
   useEffect(() => {
     // fetchData();
-    fetchComment();
+    // fetchComment();
     setIdproduct(product.key);
     // console.log('category chitiet: ', product.category);
     // console.log('product.id ', product.name);
+
     console.log('product.id ', product.key);
     console.log('id ', proid);
 
@@ -192,7 +195,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
     const querySnapshot = await firestore()
       .collection('ccdb')
       .where('text', '==', product.text)
-      .where('image', '==', product.imageUrl)
+      // .where('image', '==', product.imageUrl)
       .get();
 
     if (querySnapshot.empty) {
@@ -462,6 +465,8 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
               />
             )}
           /> */}
+
+          
           <CommentScreen fetchComment={fetchComment()} />
           <ScrollView
             refreshControl={
@@ -492,7 +497,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                       </Text>
                     </View>
 
-                    {/* <DeletedComment id={cm.key} productkey={product.key}/> */}
+                   
                     <TouchableOpacity
                       onPress={() =>
                         Alert.alert('Bạn có chắc chắn muốn xóa', '', [
@@ -514,11 +519,11 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                       />
                     </TouchableOpacity>
                   </View>
-                  {/* Nội dung comment */}
+               
                   <Text style={styles.content}> {cm.content} </Text>
                   <View style={{flexDirection: 'row', marginTop: 5}}>
                     <TouchableOpacity onPress={() => handleLikeComment(cm.key)}>
-                      {/* <TouchableOpacity onPress={handleLikeComment}> */}
+                   
 
                       {!clickLike ? (
                         <Image
@@ -532,9 +537,9 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
                         />
                       )}
                     </TouchableOpacity>
-                    {/* <Text style={{fontSize: 18}}> {numberLike} </Text> */}
+                  
                     <Text style={{fontSize: 18}}> {cm.likes} </Text>
-                    {/* <Text style={{fontSize: 18}}> {cm.usernamelike} </Text> */}
+                
                     {cm.usernamelike == '' ? (
                       <Text style={styles.name}>Người dùng</Text>
                     ) : (
