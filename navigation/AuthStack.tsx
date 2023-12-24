@@ -26,6 +26,8 @@ import CartProduct from '../screen/CartProduct';
 import Pay from '../screen/Pay';
 import Search from '../screen/Search';
 import Info from '../screen/profileafter/Info';
+import Category from '../screen/Category/Category';
+import Product from '../screen/Product/Product';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,9 +35,9 @@ const AuthStack = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="LandingScreen" component={LandingScreen} />
+        {/* <Stack.Screen name="LandingScreen" component={LandingScreen} />
         <Stack.Screen name="Signup" component={Signup} />
-        <Stack.Screen name="Signin" component={Signin} />
+        <Stack.Screen name="Signin" component={Signin} /> */}
         <Stack.Screen name="Home" component={AppStack} />
         <Stack.Screen name="Chitietccvp" component={Chitietccvp} />
         <Stack.Screen name="ListProduce" component={ListProduce} />
@@ -54,6 +56,8 @@ const AuthStack = () => {
         <Stack.Screen name="CartProduct" component={CartProduct} />
         <Stack.Screen name="Pay" component={Pay} />
         <Stack.Screen name="Info" component={Info} />
+        <Stack.Screen name="Category" component={Category} />
+        <Stack.Screen name="Product" component={Product} />
         {/* <Stack.Screen name="Search" component={Search} /> */}
       </Stack.Navigator>
     </NavigationContainer>

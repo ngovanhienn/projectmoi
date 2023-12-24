@@ -4,6 +4,7 @@ import {View, Text, Image, ImageBackground, StyleSheet,ScrollView, TouchableOpac
 import Header from './Header';
 import Haydung from '../navigation/Haydung';
 import Cart from './Cart';
+import Category from './Category/Category';
 import ListProduce from './ListProduce';
 import CcdbScreen from './Category/Caycanhdeban/CcdbHome';
 
@@ -20,7 +21,11 @@ const HomeScreen = ({navigation}) => {
         <View>
           <Haydung tile="Danh mục" />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('Danhmuc')}>
+        
+        <TouchableOpacity 
+        
+        onPress={() => navigation.navigate('Category')}
+        >
           <View>
             <Text style={{fontSize: 16, color: 'blue'}}>xem thêm</Text>
           </View>
@@ -35,7 +40,7 @@ const HomeScreen = ({navigation}) => {
         }}>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Cây cảnh để bàn')}>
+            onPress={() => navigation.navigate('Category')}>
             <Image
               style={styles.img1}
               source={require('../Image/ccvp-edb.jpg')}
@@ -48,7 +53,7 @@ const HomeScreen = ({navigation}) => {
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Cây cảnh văn phòng')}>
+            onPress={() => navigation.navigate('Category')}>
             <Image
               style={styles.img1}
               source={require('../Image/ccvp.2.jpg')}
@@ -60,7 +65,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Sen đá')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Category')}>
             <Image style={styles.img1} source={require('../Image/senda.jpg')} />
             <View style={{alignItems: 'center'}}>
               <Text style={styles.text1}>Sen đá</Text>
@@ -68,7 +73,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity onPress={() => navigation.navigate('Chậu cảnh')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Category')}>
             <Image
               style={styles.img1}
               source={require('../Image/chaucanh.jpg')}

@@ -1,30 +1,152 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+// import React, {useState, useEffect} from 'react';
+// import {
+//   View,
+//   Text,
+//   Image,
+//   StyleSheet,
+//   ScrollView,
+//   TouchableOpacity,
+// } from 'react-native';
+// import firebase from '../firebase/Firebase';
+// import ChitietSP from './ChitietSp/ChitietSP';
+// import {useNavigation} from '@react-navigation/native';
+
+// const Cart = () => {
+//   const navigation = useNavigation();
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     const ref = firebase.database().ref('messages');
+
+//     ref.on('value', snapshot => {
+//       const data = snapshot.val();
+//       setData(data);
+//     });
+
+//     return () => {
+//       ref.off();
+//     };
+//   }, []);
+
+//   const handleProductPress = product => {
+//     navigation.navigate('ChitietSP', {product});
+//   };
+
+//   return (
+//     <ScrollView>
+//       <View style={styles.container}>
+//         {data ? (
+//           Object.keys(data).map(key => (
+//             <View style={{justifyContent: 'space-evenly'}} key={key}>
+//               <TouchableOpacity onPress={() => handleProductPress(data[key])}>
+//                 <View>
+//                   <Text style={styles.text}>{data[key].createdAt}</Text>
+
+//                   {data[key].imageUrl && (
+//                     <Image
+//                       source={{uri: data[key].imageUrl}}
+//                       style={{height: 140, width: '100%'}}
+//                     />
+//                   )}
+//                   <View style={styles.dess}>
+//                     <Text style={styles.text}>{data[key].text}</Text>
+//                   </View>
+//                 </View>
+//               </TouchableOpacity>
+//             </View>
+//           ))
+//         ) : (
+//           <Text>Loading....</Text>
+//         )}
+//       </View>
+//     </ScrollView>
+//   );
+// };
+
+// import React, { useState, useEffect } from 'react';
+// import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+// import firebase from '../firebase/Firebase';
+// import firestore from '@react-native-firebase/firestore'; // Import firestore
+
+// import ChitietSP from './ChitietSp/ChitietSP';
+// import { useNavigation } from '@react-navigation/native';
+
+// const Cart = () => {
+//   const navigation = useNavigation();
+//   const [data, setData] = useState(null);
+
+//   useEffect(() => {
+//     const collectionRef = firebase.firestore().collection('outstanding').get();
+
+//     const unsubscribe = collectionRef.onSnapshot(snapshot => {
+//       const documents = snapshot.docs.map(doc => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+//       setData(documents);
+//     });
+
+//     return () => {
+//       unsubscribe();
+//     };
+//   }, []);
+
+//   const handleProductPress = product => {
+//     navigation.navigate('ChitietSP', {product});
+//   };
+
+//   return (
+//     <ScrollView>
+//       <View style={styles.container}>
+//         {data ? (
+//           data.map((item, index) => (
+//             <View style={{justifyContent: 'space-evenly'}} key={index}>
+//               <TouchableOpacity onPress={() => handleProductPress(item)}>
+//                 <View>
+//                   <Text style={styles.text}>{item.createdAt}</Text>
+
+//                   {item.imageUrl && (
+//                     <Image
+//                       source={{uri: item.imageUrl}}
+//                       style={{height: 140, width: 140}}
+//                     />
+//                   )}
+//                   <View style={styles.dess}>
+//                     <Text style={styles.text}>{item.name}</Text>
+//                   </View>
+//                 </View>
+//               </TouchableOpacity>
+//             </View>
+//           ))
+//         ) : (
+//           <Text>Loading....</Text>
+//         )}
+//       </View>
+//     </ScrollView>
+//   );
+// };
+
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import firebase from '../firebase/Firebase';
+import firestore from '@react-native-firebase/firestore'; // Import firestore
+
 import ChitietSP from './ChitietSp/ChitietSP';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Cart = () => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    const ref = firebase.database().ref('messages');
-
-    ref.on('value', snapshot => {
-      const data = snapshot.val();
-      setData(data);
+    const collectionRef = firestore().collection('outstanding');
+    const unsubscribe = collectionRef.onSnapshot(snapshot => {
+    const documents = snapshot.docs.map(doc => doc.data());
+      setData(documents);
     });
 
     return () => {
-      ref.off();
+      unsubscribe();
     };
   }, []);
 
@@ -36,20 +158,20 @@ const Cart = () => {
     <ScrollView>
       <View style={styles.container}>
         {data ? (
-          Object.keys(data).map(key => (
-            <View style={{justifyContent: 'space-evenly'}} key={key}>
-              <TouchableOpacity onPress={() => handleProductPress(data[key])}>
+          data.map((item, index) => (
+            <View style={{justifyContent: 'space-evenly'}} key={index}>
+              <TouchableOpacity onPress={() => handleProductPress(item)}>
                 <View>
-                  <Text style={styles.text}>{data[key].createdAt}</Text>
+                  <Text style={styles.text}>{item.createdAt}</Text>
 
-                  {data[key].imageUrl && (
+                  {item.image && (
                     <Image
-                      source={{uri: data[key].imageUrl}}
-                      style={{height: 140, width: '100%'}}
+                      source={{uri: item.image}}
+                      style={{height: 140, width: '98%',margin:5,borderRadius:5}}
                     />
                   )}
                   <View style={styles.dess}>
-                    <Text style={styles.text}>{data[key].text}</Text>
+                    <Text style={styles.text}>{item.name}</Text>
                   </View>
                 </View>
               </TouchableOpacity>

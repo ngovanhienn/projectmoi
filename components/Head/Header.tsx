@@ -9,7 +9,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import React from 'react';
 // import { Ionicons } from "@expo/vector-icons";
 
-export default function Header2({navigation}) {
+export default function Header({navigation}) {
   return (
     <View
       style={{

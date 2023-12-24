@@ -1,4 +1,4 @@
-// import React, {useState, useEffect} from 'react';
+// import React, {useState, useEffect, useContext} from 'react';
 // import {
 //   View,
 //   Text,
@@ -7,16 +7,53 @@
 //   ScrollView,
 //   TouchableOpacity,
 //   Alert,
+//   RefreshControl,
+//   ActivityIndicator,
 // } from 'react-native';
 // // import firebase from '../../../firebase/Firebase';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // import {useNavigation} from '@react-navigation/native';
+// import firestore from '@react-native-firebase/firestore';
+// import {DocumentData, doc} from 'firebase/firestore';
+// // import firebase from '../firebase/Firebase';
+// // import Drawer from '../navigation/Drawer';
 // import firebase from '../firebase/Firebase';
-// import Drawer from '../navigation/Drawer';
-// const CartProduct = () => {
-//   const [products, setProducts] = useState([]);
+// import {AppContext} from '../components/AppContext/AppContext';
+
+// const Giohang = () => {
+//   const [products, setProducts] = useState<DocumentData[]>([]);
+//   const [isRefreshing, setIsRefreshing] = useState(false);
+//   const [loading, setLoading] = useState(false);
+
+//   const {emailname} = useContext(AppContext);
 //   const navigation = useNavigation();
+
+//   const featchData = async () => {
+//     try {
+//       const subscriber = firestore()
+//         .collection('ccdb')
+//         // .where('username', '==', emailname)
+//         .onSnapshot(querySnapshot => {
+//           const cart: React.SetStateAction<DocumentData[]> | {key: string}[] =
+//             [];
+
+//           querySnapshot.forEach(documentSnapshot => {
+//             cart.push({
+//               ...documentSnapshot.data(),
+//               key: documentSnapshot.id,
+//             });
+//           });
+
+//           setProducts(cart);
+//           // setLoading(false);
+//         });
+
+//       return () => subscriber();
+//     } catch (error) {
+//       console.error('Error fetching products:', error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 //   useEffect(() => {
 //     firebase
 //       .database()
@@ -34,106 +71,132 @@
 //         setProducts(products);
 //       });
 //   }, []);
+//   // useEffect(() => {
+//   //   // Lắng nghe các thay đổi đối với thông tin sản phẩm trong giỏ hàng
+//   //   featchData();
+//   //   // console.log('product: ', JSON.stringify(products, null, 3));
+//   // }, []);
+//   const handleRefresh = () => {
+//     setIsRefreshing(true);
+//     featchData().then(() => setIsRefreshing(false));
+//   };
+//   const deleteProduct = async (productId: string) => {
+//     try {
+//       await firestore().collection('ccdb').doc(productId).delete();
+//       Alert.alert('Xóa thành công!');
+//       // console.log('Deleted product ID:', doc);
+//       featchData();
+//       console.log('productId: ', productId);
+//     } catch (error) {
+//       console.error('Error removing document: ', error);
+//     }
+//   };
+//   const totalAmount = products.reduce(
+//     (total, product) => total + product.price * product.quantity,
+//     0,
+//   );
+//   // let formattedTotalAmount = totalAmount.toLocaleString('vi-VN', {
+//   //   style: 'currency',
+//   //   currency: 'VND'
+//   // });
+//   let formattedTotalAmount = totalAmount.toLocaleString();
+//   if (loading) {
+//     return <ActivityIndicator />;
+//   }
 
 //   return (
 //     <View style={styles.container}>
-//       <View style={{flexDirection: 'row'}}>
-//         <Drawer tile="GIỎ HÀNG" />
-//         <Ionicons name="cart" size={32} style={{margin: 10}} />
-//       </View>
-//       <ScrollView>
+//       <Text style={[styles.name, {color: 'blue', fontSize: 24}]}>Giỏ hàng</Text>
+//       <Text style={[styles.name, {fontSize: 18}]}>
+//         Các sản phẩm mà {emailname} bạn đã chọn
+//       </Text>
+//       {/* <Drawer tile="GIỎ HÀNG" /> */}
+//       <ScrollView
+//         refreshControl={
+//           <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
+//         }>
 //         {products.map((product, index) => (
 //           <View key={index} style={styles.product}>
 //             <Image source={{uri: product.imageUrl}} style={styles.image} />
 //             <View style={styles.info}>
 //               <Text style={styles.name}>{product.name}</Text>
-//               <Text style={styles.price}>{product.price} VNĐ</Text>
+//               <Text style={styles.price}>
+//                 {/* {product.price.toLocaleString()} VNĐ */}
+//               </Text>
 //               <Text style={styles.quantity}>x{product.quantity}</Text>
-//               <Text>______________________________________</Text>
+
+//               <Text>___________________________________</Text>
 //             </View>
+//             <TouchableOpacity
+//               style={styles.delete}
+//               // onPress={() => {
+//               //   deleteProduct(product.key);
+//               //   console.log('produc id', product.name);
+//               // }}
+//               onPress={() =>
+//                 Alert.alert('Bạn có chắc chắn muốn xóa', '', [
+//                   {text: 'Cancel'},
+//                   {
+//                     text: 'OK',
+//                     // onPress: () => navigation.navigate('Home'),
+//                     onPress: () => {
+//                       deleteProduct(product.key);
+//                       console.log('produc id', product.text);
+//                     },
+//                     style: 'default',
+//                   },
+//                 ])
+//               }>
+//               <Image
+//                 source={require('../Image/cart.png')}
+//                 style={{
+//                   width: 50,
+//                   height: 50,
+//                   backgroundColor: '#fff',
+//                   borderRadius: 28,
+//                 }}
+//               />
+//               <Text style={{color: '#fff', fontSize: 16}}>Xóa</Text>
+//               {/* console.console.log('id: ', product.id); */}
+//             </TouchableOpacity>
 //           </View>
 //         ))}
 //       </ScrollView>
 //       <View style={styles.total}>
-//         <Text style={styles.totalText}>Tổng tiền:</Text>
-//         <Text style={styles.totalText}>
+//         <Text style={styles.totalText}>Tổng tiền: </Text>
+//         {/* <Text style={styles.totalText}>
 //           {products.reduce(
 //             (total, product) => total + product.price * product.quantity,
 //             0,
 //           )}{' '}
 //           VNĐ
-//         </Text>
+//         </Text> */}
+//         <Text style={styles.totalText}>{formattedTotalAmount} VNĐ</Text>
 //       </View>
 //       <View style={styles.thanhtoan}>
-//         <TouchableOpacity onPress={() => navigation.navigate('Pay')}>
-//           <Text style={styles.totalText2}>Thanh Toán</Text>
+//         <TouchableOpacity
+//           // onPress={() =>
+//           //   Alert.alert('Thanh toán thành công', 'Cảm ơn bạn đã đặt hàng', [
+//           //     {text: 'Cancel'},
+//           //     {
+//           //       text: 'OK',
+//           //       onPress: () => navigation.navigate('Payment'),
+//           //       style: 'default',
+//           //     },
+//           //   ])
+//           // }
+//           // onPress={()=>navigation.navigate('Payment')}
+//           onPress={() => navigation.navigate('Pay', {formattedTotalAmount})}>
+//           <Text style={styles.totalText}>Thanh Toán</Text>
 //         </TouchableOpacity>
 //       </View>
 //     </View>
 //   );
 // };
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#ADD8E6',
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-//   product: {
-//     flexDirection: 'row',
-//     marginVertical: 10,
-//   },
-//   image: {
-//     width: 100,
-//     height: 100,
-//     borderRadius: 5,
-//   },
-//   info: {
-//     marginLeft: 15,
-//   },
-//   name: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     color: 'black',
-//   },
-//   price: {
-//     fontSize: 18,
-//     color: 'red',
-//   },
-//   quantity: {
-//     fontSize: 18,
-//     color: 'black',
-//   },
-//   total: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     marginVertical: 20,
-//   },
-//   totalText: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     color: 'red',
-//   },
-//   thanhtoan: {
-//     backgroundColor: 'orange',
-//     width: '50%',
-//     height: 60,
-//     marginVertical: 20,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     borderRadius: 20,
-//   },
-//   totalText2: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//     color: '#fff',
-//   },
-// });
+// export default Giohang;
 
-// export default CartProduct;
-
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   Text,
@@ -145,137 +208,101 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-// import firebase from '../../../firebase/Firebase';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
-import {DocumentData, doc} from 'firebase/firestore';
-// import firebase from '../firebase/Firebase';
-// import Drawer from '../navigation/Drawer';
-import firebase from '../firebase/Firebase';
-import {AppContext} from '../components/AppContext/AppContext';
+import { DocumentData } from 'firebase/firestore';
+import { AppContext } from '../components/AppContext/AppContext';
 
 const Giohang = () => {
   const [products, setProducts] = useState<DocumentData[]>([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const {emailname} = useContext(AppContext);
+  const { emailname } = useContext(AppContext);
   const navigation = useNavigation();
 
-   const featchData = async () => {
+  const fetchData = async () => {
     try {
-      const subscriber = firestore()
-        .collection('ccdb')
-        // .where('username', '==', emailname)
-        .onSnapshot(querySnapshot => {
-          const cart: React.SetStateAction<DocumentData[]> | { key: string; }[] = [];
+      const querySnapshot = await firestore()
+        .collection('Product')
+        .where('username', '==', emailname)
+        .get();
 
-          querySnapshot.forEach(documentSnapshot => {
-            cart.push({
-              ...documentSnapshot.data(),
-              key: documentSnapshot.id,
-            });
-          });
+      const cart: DocumentData[] = [];
 
-          setProducts(cart);
-          // setLoading(false);
+      querySnapshot.forEach((documentSnapshot) => {
+        cart.push({
+          ...documentSnapshot.data(),
+          key: documentSnapshot.id,
         });
+      });
 
-      return () => subscriber();
+      setProducts(cart);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false);
     }
   };
+
   useEffect(() => {
-    firebase
-      .database()
-      .ref('giohangcaycanh')
-      .on('value', snapshot => {
-        const cartData = snapshot.val();
-        const products = [];
-
-        if (cartData) {
-          for (const key in cartData) {
-            products.push(cartData[key]);
-          }
-        }
-
-        setProducts(products);
-      });
+    fetchData();
   }, []);
-  // useEffect(() => {
-  //   // Lắng nghe các thay đổi đối với thông tin sản phẩm trong giỏ hàng
-  //   featchData();
-  //   // console.log('product: ', JSON.stringify(products, null, 3));
-  // }, []);
+
   const handleRefresh = () => {
     setIsRefreshing(true);
-    featchData().then(() => setIsRefreshing(false));
+    fetchData().then(() => setIsRefreshing(false));
   };
+
   const deleteProduct = async (productId: string) => {
     try {
-      await firestore().collection('ccdb').doc(productId).delete();
+      await firestore().collection('Product').doc(productId).delete();
       Alert.alert('Xóa thành công!');
-      // console.log('Deleted product ID:', doc);
-      featchData();
+      fetchData();
       console.log('productId: ', productId);
     } catch (error) {
       console.error('Error removing document: ', error);
     }
   };
+
   const totalAmount = products.reduce(
     (total, product) => total + product.price * product.quantity,
-    0,
+    0
   );
-  // let formattedTotalAmount = totalAmount.toLocaleString('vi-VN', {
-  //   style: 'currency',
-  //   currency: 'VND'
-  // });
   let formattedTotalAmount = totalAmount.toLocaleString();
+
   if (loading) {
     return <ActivityIndicator />;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.name, {color: 'blue', fontSize: 24}]}>Giỏ hàng</Text>
-      <Text style={[styles.name, {fontSize: 18}]}>
+      <Text style={[styles.name, { color: 'blue', fontSize: 24 }]}>Giỏ hàng</Text>
+      <Text style={[styles.name, { fontSize: 18 }]}>
         Các sản phẩm mà {emailname} bạn đã chọn
       </Text>
-      {/* <Drawer tile="GIỎ HÀNG" /> */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh} />
         }>
-        {products.map((product, index) => (
+        {products.map((product: DocumentData, index: number) => (
           <View key={index} style={styles.product}>
-            <Image source={{uri: product.imageUrl}} style={styles.image} />
+            <Image source={{ uri: product.imageUrl }} style={styles.image} />
             <View style={styles.info}>
               <Text style={styles.name}>{product.name}</Text>
-              <Text style={styles.price}>
-                {/* {product.price.toLocaleString()} VNĐ */}
-              </Text>
+              <Text style={styles.price}></Text>
               <Text style={styles.quantity}>x{product.quantity}</Text>
-
               <Text>___________________________________</Text>
             </View>
             <TouchableOpacity
               style={styles.delete}
-              // onPress={() => {
-              //   deleteProduct(product.key);
-              //   console.log('produc id', product.name);
-              // }}
               onPress={() =>
                 Alert.alert('Bạn có chắc chắn muốn xóa', '', [
-                  {text: 'Cancel'},
+                  { text: 'Cancel' },
                   {
                     text: 'OK',
-                    // onPress: () => navigation.navigate('Home'),
                     onPress: () => {
                       deleteProduct(product.key);
-                      console.log('produc id', product.text);
+                      console.log('product id', product.key);
                     },
                     style: 'default',
                   },
@@ -290,39 +317,18 @@ const Giohang = () => {
                   borderRadius: 28,
                 }}
               />
-              <Text style={{color: '#fff', fontSize: 16}}>Xóa</Text>
-              {/* console.console.log('id: ', product.id); */}
+              <Text style={{ color: '#fff', fontSize: 16 }}>Xóa</Text>
             </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
       <View style={styles.total}>
         <Text style={styles.totalText}>Tổng tiền: </Text>
-        {/* <Text style={styles.totalText}>
-          {products.reduce(
-            (total, product) => total + product.price * product.quantity,
-            0,
-          )}{' '}
-          VNĐ
-        </Text> */}
         <Text style={styles.totalText}>{formattedTotalAmount} VNĐ</Text>
       </View>
       <View style={styles.thanhtoan}>
         <TouchableOpacity
-          // onPress={() =>
-          //   Alert.alert('Thanh toán thành công', 'Cảm ơn bạn đã đặt hàng', [
-          //     {text: 'Cancel'},
-          //     {
-          //       text: 'OK',
-          //       onPress: () => navigation.navigate('Payment'),
-          //       style: 'default',
-          //     },
-          //   ])
-          // }
-          // onPress={()=>navigation.navigate('Payment')}
-          onPress={() =>
-            navigation.navigate('Pay', {formattedTotalAmount})
-          }>
+          onPress={() => navigation.navigate('Pay', { formattedTotalAmount })}>
           <Text style={styles.totalText}>Thanh Toán</Text>
         </TouchableOpacity>
       </View>
@@ -331,6 +337,7 @@ const Giohang = () => {
 };
 
 export default Giohang;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

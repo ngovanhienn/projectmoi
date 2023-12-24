@@ -183,20 +183,20 @@ const Style = StyleSheet.create({
   },
   sptuongtu: {
     padding: 5,
-    backgroundColor: '#333',
-    // height:100,
-    marginBottom:50
+    backgroundColor: '#8C4C29',
+    // height:180,
+    marginBottom: 50,
     // width: '100%'
   },
   imgtuongtu: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 110,
+    height: 80,
+
     // marginHorizontal: 5
   },
   tentuongtu: {
     width: 110,
-    color: 'black',
+    color: '#fff',
   },
   viewMoreText: {
     color: 'blue',
@@ -231,7 +231,7 @@ const Style = StyleSheet.create({
     height: 55,
     marginTop: 50,
     paddingHorizontal: 5,
-    backgroundColor: '#ffa64d',
+    backgroundColor: '#33C208',
     marginRight: 6,
   },
   tim: {
@@ -261,7 +261,7 @@ const Style = StyleSheet.create({
     marginHorizontal: 5,
     flexDirection: 'row',
     width: '80%',
-    marginBottom: 10
+    marginBottom: 10,
     // minHeight: 500
   },
   imgavata: {
@@ -269,24 +269,24 @@ const Style = StyleSheet.create({
     height: 30,
   },
   noidung: {
-    // marginTop: 20, 
-    marginHorizontal: 5, 
+    // marginTop: 20,
+    marginHorizontal: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: 360
+    width: 360,
   },
   nameanddate: {},
   name: {
     fontSize: 17,
     fontWeight: '400',
-    color: '#000'
+    color: '#000',
   },
   content: {
-  borderWidth: 0.2,
-  marginLeft: 5,
-  marginTop: 3,
-  fontSize: 18,
-  color: '#000'
+    borderWidth: 0.2,
+    marginLeft: 5,
+    marginTop: 3,
+    fontSize: 18,
+    color: '#000',
   },
 });
 
