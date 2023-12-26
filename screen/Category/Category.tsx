@@ -1,24 +1,18 @@
 import React, {useEffect, useState, createContext} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 import firestore from '@react-native-firebase/firestore';
 import {DocumentData} from 'firebase/firestore';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 // import {MainStackParamList} from '../types/RootList';
 import styles from './style';
 // const CategoryContext = createContext(null);
 const CategoryContext = createContext<(categoryname: any) => void>(() => {});
 
 const Category = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   const [data, setData] = useState<DocumentData[]>([]);
   // const navigation = useNavigation();
 

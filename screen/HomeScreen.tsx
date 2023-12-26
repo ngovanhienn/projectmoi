@@ -26,9 +26,9 @@ const HomeScreen = ({navigation}) => {
         
         onPress={() => navigation.navigate('Category')}
         >
-          <View>
+          {/* <View>
             <Text style={{fontSize: 16, color: 'blue'}}>xem thêm</Text>
-          </View>
+          </View> */}
         </TouchableOpacity>
       </View>
 

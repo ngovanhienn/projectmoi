@@ -20,7 +20,7 @@ const Signin = ({navigation}) => {
       .signInWithEmailAndPassword(username, password)
       .then(() => {
         Alert.alert('Đăng nhập thành công');
-        navigation.navigate('Home');
+        navigation.navigate('HomeScreen');
       })
       .catch(err => {
         console.log(err);

@@ -19,14 +19,14 @@ const Header = ({navigation}) => {
           justifyContent: 'space-between',
           alignItems: 'center',
           backgroundColor: '#00FF00',
-          height: 68,
+          height: 50,
         }}>
         <View style={{}}>
           <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <ImageBackground
-              source={require('../Image/ngoinha.jpg')}
-              style={{width: 50, height: 50}}
-              imageStyle={{borderRadius: 25}}
+              source={require('../Image/logo.jpg')}
+              style={{width: 80, height: 50}}
+              imageStyle={{borderRadius: 10}}
             />
           </TouchableOpacity>
         </View>

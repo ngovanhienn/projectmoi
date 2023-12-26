@@ -126,22 +126,7 @@ const ProfileScreen = ({navigation}) => {
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <View
-            style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
-            <View style={styles.boxicon}>
-              <FontAwesome5
-                name="info"
-                size={24}
-                color="green"
-                styles={styles.icon}></FontAwesome5>
-            </View>
-            <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
-              Về chúng tôi
-            </Text>
-            {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
-          </View>
-        </TouchableOpacity>
+       
 
         <View style={{}}>
           <TouchableOpacity

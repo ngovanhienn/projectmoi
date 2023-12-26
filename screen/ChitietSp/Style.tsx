@@ -29,7 +29,7 @@ const Style = StyleSheet.create({
   //     fontWeight: 'bold',
   //   },
   textgiamgia: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#FF0000',
     // color: '#ff0000',
     fontWeight: 'bold',
@@ -42,9 +42,9 @@ const Style = StyleSheet.create({
     marginTop: 10,
     fontStyle: 'italic',
     position: 'absolute',
-    left: 60,
-    top: 6,
-    transform: [{rotate: '40deg'}],
+    left: 50,
+    bottom:6,
+    // transform: [{rotate: '40deg'}],
   },
   img: {
     width: '100%',

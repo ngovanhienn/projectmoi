@@ -108,27 +108,28 @@ const Product= ({route}: any) => {
         onPress={() => handleProductPress(item)}>
         <Image source={{uri: item.image}} style={styles.productImage} />
         <View style={styles.productInfo}>
-          {item.giamgia != 0 && (
+
+          <Text style={styles.productName}>{item.name}</Text>
+          {/* {item.giamgia != 0 && (
             <View style={styles.giamgia}>
               <Text style={[styles.gia, {color: 'red', fontSize: 18}]}>
-                Sốt!!! Giảm đến
+                Giảm{' '}
               </Text>
 
               <Text style={[styles.gia, {color: 'red', fontSize: 18}]}>
-                {item.giamgia} %
+                {item.giamgia}%
               </Text>
             </View>
-          )}
-          <Text style={styles.productName}>{item.name}</Text>
+          )} */}
           {item.giamgia != 0 ? (
             <View>
               <View style={styles.hiengia}>
-                <Text style={styles.gia}>Từ: </Text>
+                <Text style={styles.productPrice}>Giá gốc: </Text>
                 <Text style={styles.gia}>{item.giagoc} đ</Text>
               </View>
               <View style={styles.hiengia}>
-                <Text style={styles.gia}>Xuống còn: </Text>
-                <Text style={styles.productPrice}>{item.price} đ</Text>
+                <Text style={styles.productPrice}>Giảm còn: </Text>
+                <Text style={styles.productPrice2}>{item.price} đ</Text>
               </View>
             </View>
           ) : (

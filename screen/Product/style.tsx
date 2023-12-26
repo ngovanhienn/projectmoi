@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   gia: {
     color: '#000',
-    fontSize: 16,
+    fontSize: 14,
   },
   productInfo: {
     flex: 1,
@@ -41,7 +41,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   productPrice: {
-    fontSize: 16,
+    fontSize: 15,
+    color: '#333',
+  },
+  productPrice2: {
+    fontSize: 18,
     color: '#ff661a',
   },
   timkiem: {
