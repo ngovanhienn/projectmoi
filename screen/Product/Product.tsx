@@ -125,17 +125,19 @@ const Product= ({route}: any) => {
             <View>
               <View style={styles.hiengia}>
                 <Text style={styles.productPrice}>Giá gốc: </Text>
-                <Text style={styles.gia}>{item.giagoc} đ</Text>
+                <Text style={styles.gia}>{parseFloat(item.giagoc).toLocaleString()} đ</Text>
               </View>
               <View style={styles.hiengia}>
                 <Text style={styles.productPrice}>Giảm còn: </Text>
-                <Text style={styles.productPrice2}>{item.price} đ</Text>
+                <Text style={styles.productPrice2}>
+                  {item.price.toLocaleString()} đ
+                </Text>
               </View>
             </View>
           ) : (
             <View>
               <Text style={[styles.productPrice, {fontSize: 22}]}>
-                Giá: {item.price} đ
+                Giá: {item.price.toLocaleString()} đ
               </Text>
             </View>
           )}

@@ -186,6 +186,8 @@ const Style = StyleSheet.create({
     backgroundColor: '#8C4C29',
     // height:180,
     marginBottom: 50,
+    borderWidth:1,
+    borderColor:"#fff"
     // width: '100%'
   },
   imgtuongtu: {

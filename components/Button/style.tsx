@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     //   height: 80
     // Các thuộc tính khác của button
     height: 60,
-    backgroundColor: 'orange',
+    backgroundColor: '#00FF00',
     justifyContent: 'center',
     width: '80%',
     alignItems: 'center',
@@ -19,12 +19,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 8,
     marginBottom: 15,
+    marginTop:15
   },
   buttonText: {
     // color: 'white',
     // fontSize: 20,
     // Các thuộc tính khác của văn bản trong button
-    color: 'white',
+    color: '#333',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',

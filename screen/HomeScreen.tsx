@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, Text, Image, ImageBackground, StyleSheet,ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 
 import Header from './Header';
 import Haydung from '../navigation/Haydung';
@@ -21,11 +29,8 @@ const HomeScreen = ({navigation}) => {
         <View>
           <Haydung tile="Danh mục" />
         </View>
-        
-        <TouchableOpacity 
-        
-        onPress={() => navigation.navigate('Category')}
-        >
+
+        <TouchableOpacity onPress={() => navigation.navigate('Category')}>
           {/* <View>
             <Text style={{fontSize: 16, color: 'blue'}}>xem thêm</Text>
           </View> */}
@@ -39,8 +44,7 @@ const HomeScreen = ({navigation}) => {
           marginTop: 16,
         }}>
         <View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Category')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Category')}>
             <Image
               style={styles.img1}
               source={require('../Image/ccvp-edb.jpg')}
@@ -52,8 +56,7 @@ const HomeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Category')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Category')}>
             <Image
               style={styles.img1}
               source={require('../Image/ccvp.2.jpg')}
@@ -85,7 +88,6 @@ const HomeScreen = ({navigation}) => {
       <Haydung tile="Sản phẩm nổi bật" />
       {/* <ListProduce navigation={navigation} /> */}
       <Cart navigation={navigation} />
-
     </ScrollView>
   );
 };

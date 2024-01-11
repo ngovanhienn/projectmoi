@@ -30,7 +30,7 @@ const ProfileScreen = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.item}>
-        <TouchableOpacity onPress={() => navigation.navigate('Info')}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate('Info')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 50}}>
             <View style={styles.boxicon}>
@@ -43,26 +43,25 @@ const ProfileScreen = ({navigation}) => {
             <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
               Thông tin tài khoản
             </Text>
-            {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => navigation.navigate('Donhang')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
             <View style={styles.boxicon}>
               <FontAwesome5
-                name="wallet"
+                name="book"
                 size={24}
                 color="green"
                 styles={styles.icon}></FontAwesome5>
             </View>
             <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
-              Ví của tôi
+              Đơn hàng của tôi
             </Text>
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Danhgia')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
             <View style={styles.boxicon}>
@@ -78,7 +77,7 @@ const ProfileScreen = ({navigation}) => {
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Danhgia')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
             <View style={styles.boxicon}>
@@ -94,7 +93,7 @@ const ProfileScreen = ({navigation}) => {
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Baomat')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
             <View style={styles.boxicon}>
@@ -110,7 +109,7 @@ const ProfileScreen = ({navigation}) => {
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Dieukhoan')}>
           <View
             style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
             <View style={styles.boxicon}>
@@ -122,6 +121,22 @@ const ProfileScreen = ({navigation}) => {
             </View>
             <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
               Điều khoản sử dụng
+            </Text>
+            {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Exclamation')}>
+          <View
+            style={{flexDirection: 'row', marginHorizontal: 10, marginTop: 30}}>
+            <View style={styles.boxicon}>
+              <FontAwesome5
+                name="exclamation"
+                size={24}
+                color="green"
+                styles={styles.icon}></FontAwesome5>
+            </View>
+            <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+              Về chúng tôi
             </Text>
             {/* <FontAwesome5 name="angle-right" size={24} style={styles.icon1}></FontAwesome5> */}
           </View>

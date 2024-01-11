@@ -1,73 +1,87 @@
-import React, { useState, useEffect, useContext, FC, FunctionComponent } from 'react';
-import { View, Text, TextInput, Button, FlatList, Alert, TouchableOpacity, ScrollView, RefreshControl, Image } from 'react-native';
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  FC,
+  FunctionComponent,
+} from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  FlatList,
+  Alert,
+  TouchableOpacity,
+  ScrollView,
+  RefreshControl,
+  Image,
+} from 'react-native';
 // import firebase from 'firebase';
 import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { DocumentData } from 'firebase/firestore';
-import { Timestamp } from 'firebase/firestore';
+import {DocumentData} from 'firebase/firestore';
+import {Timestamp} from 'firebase/firestore';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 // import styles from './style';
 import styles from './style';
 import MyInput from '../../Profile/Textinput';
-import { AppContext } from '../../../components/AppContext/AppContext';
+import {AppContext} from '../../../components/AppContext/AppContext';
 import MyButton from '../../../components/Button/Mybutton';
 
 // const CommentScreen: FC<{productid: string, username: string, timestamp:Date, id: string, content: string}> = ({productid, username, timestamp, id, content}) => {
 const CommentScreen = ({fetchComment}) => {
-
-  const {idProduct, emailname} = useContext(AppContext)
+  const {idProduct, emailname} = useContext(AppContext);
   const [comments, setComments] = useState<DocumentData[]>([]);
   const [commentText, setCommentText] = useState('');
   // const [refreshingComment, setRefreshingComment] = useState(false);
 
   // const { productId } = route.params;
-  
-    // const fetchComment = async () => {
-    //   const snapshot = await firestore()
-    //     .collection('comments')
-    //     // .where('productId', '==', productid)
-    //     .orderBy('timestamp', 'desc')
-    //     .get();
-  
-    //   // const items = snapshot.docs.map((doc) => (doc.data()));
-    //   const items = snapshot.docs.map(doc => ({
-    //     ...doc.data(),
-    //     id: doc.id,
-    //   }));
-    //   setComments(items);
-    // };
-    // const handleRefresh = () => {
-    //   setRefreshingComment(true);
-    //   fetchComment().then(() => setRefreshingComment(false));
-    // };
 
-// const DeleteComment= () => {}
-// const deleteComments = async (commentKey: string) => {
-//   try {
-//     await firestore().collection('Cart').doc(commentKey).delete();
-//     Alert.alert('Xóa thành công!');
-//     // console.log('Deleted product ID:', doc);
-//     fetchComment();
-//     console.log('productId: ', commentKey);
-//   } catch (error) {
-//     console.error('Error removing document: ', error);
-//   }
-// };
+  // const fetchComment = async () => {
+  //   const snapshot = await firestore()
+  //     .collection('comments')
+  //     // .where('productId', '==', productid)
+  //     .orderBy('timestamp', 'desc')
+  //     .get();
 
+  //   // const items = snapshot.docs.map((doc) => (doc.data()));
+  //   const items = snapshot.docs.map(doc => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  //   }));
+  //   setComments(items);
+  // };
+  // const handleRefresh = () => {
+  //   setRefreshingComment(true);
+  //   fetchComment().then(() => setRefreshingComment(false));
+  // };
+
+  // const DeleteComment= () => {}
+  // const deleteComments = async (commentKey: string) => {
+  //   try {
+  //     await firestore().collection('Cart').doc(commentKey).delete();
+  //     Alert.alert('Xóa thành công!');
+  //     // console.log('Deleted product ID:', doc);
+  //     fetchComment();
+  //     console.log('productId: ', commentKey);
+  //   } catch (error) {
+  //     console.error('Error removing document: ', error);
+  //   }
+  // };
 
   const postComment = async () => {
     try {
       const commentData = {
-        productId:idProduct,
+        productId: idProduct,
         username: emailname,
         content: commentText,
-        timestamp: firestore.Timestamp.fromDate(new Date()), 
+        timestamp: firestore.Timestamp.fromDate(new Date()),
         likes: 0,
         // usernamelike: [...emailname, emailname]
-        usernamelike: 'hi'
+        usernamelike: 'hi',
         // hasLiked: false,
       };
 
@@ -78,14 +92,17 @@ const CommentScreen = ({fetchComment}) => {
       // getComments();
       fetchComment;
       setCommentText('');
-      Alert.alert('Thêm thành công')
+      Alert.alert('Thêm thành công');
     } catch (error) {
       console.log('Error posting comment: ', error);
     }
   };
   return (
     <View style={styles.addcomment}>
-      <MyInput value={commentText} onChangeText={text => setCommentText(text)} />
+      <MyInput
+        value={commentText}
+        onChangeText={text => setCommentText(text)}
+      />
       <TouchableOpacity style={styles.button} onPress={postComment}>
         <Text style={styles.buttonText}>Bình luận</Text>
       </TouchableOpacity>
@@ -140,8 +157,8 @@ const CommentScreen = ({fetchComment}) => {
               </View>
               ))}
               </ScrollView> */}
-              
-              {/* <View style={styles.binhluan2}>
+
+      {/* <View style={styles.binhluan2}>
                 <Image
                   source={require('../../Image/Image/avatar.png')}
                   style={styles.imgavata}

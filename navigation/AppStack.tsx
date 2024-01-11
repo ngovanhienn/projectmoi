@@ -212,7 +212,7 @@ const AppStack = () => {
         name="Category"
         component={Category}
         options={{
-          tabBarLabel: 'Loại sản phẩm',
+          tabBarLabel: 'Danh mục',
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="book" size={24} color="#6A5ACD" />
           ),

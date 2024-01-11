@@ -22,30 +22,12 @@ const Header = ({navigation}) => {
           height: 50,
         }}>
         <View style={{}}>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <ImageBackground
-              source={require('../Image/logo.jpg')}
-              style={{width: 80, height: 50}}
-              imageStyle={{borderRadius: 10}}
-            />
-          </TouchableOpacity>
+          <ImageBackground
+            source={require('../Image/logo.jpg')}
+            style={{width: 80, height: 50}}
+            imageStyle={{borderRadius: 10}}
+          />
         </View>
-
-        {/* <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-          <View style={styles.search}>
-            <Text style={styles.searchButton}>Tìm kiếm</Text>
-            <FontAwesome5 name="search" size={12} color="black"></FontAwesome5>
-          </View>
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity onPress={() => navigation.navigate('CartProduct')}>
-          <View style={styles.cart}>
-            <Text></Text>
-            <FontAwesome5
-              name="cart-plus"
-              size={20}
-              color="#EEE8AA"></FontAwesome5>
-          </View>
-        </TouchableOpacity> */}
 
         <View style={{marginRight: 10}}>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
@@ -89,4 +71,3 @@ const styles = StyleSheet.create({
 });
 
 export default Header;
-

@@ -83,6 +83,14 @@ import Signin from '../screen/Login/Signin';
 import Product from '../screen/Product/Product';
 import Pay from '../screen/Pay';
 import Signup from '../screen/Login/SignupScreen';
+import Baomat from '../option/Baomat';
+import Danhgia from '../option/Danhgia';
+import Dieukhoan from '../option/Dieukhoan';
+import Info from '../option/Info';
+
+import Walet from '../option/Walet';
+import Exclamation from '../option/Exclamation';
+import Donhang from '../screen/Donhang/Donhang';
 
 const AuthStack = () => {
   // const Stack = createNativeStackNavigator();
@@ -108,20 +116,25 @@ const AuthStack = () => {
     <AppProvider>
       <NavigationContainer>
         <RootStack.Navigator
-          initialRouteName="Login"
-          screenOptions={{headerShown: false}}>
-          
+          // initialRouteName="Login"
+          screenOptions={{headerShown: false}}>      
           {/* <RootStack.Screen name="Signin" component={Signin} />
           <RootStack.Screen name="Signup" component={Signup} /> */}
-          <RootStack.Screen name="AppStack" component={AppStack} />
-          <RootStack.Screen name="HomeScreen" component={HomeScreen} />
+          <RootStack.Screen name="HomeScreen" component={AppStack} />
+          {/* <RootStack.Screen name="HomeScreen" component={HomeScreen} /> */}
           <RootStack.Screen name="ChitietSP" component={ChitietSP} />
           <RootStack.Screen name="ProfileScreen" component={ProfileScreen} />
-          <RootStack.Screen name="CartProduct" component={CartProduct} />
-          
+          <RootStack.Screen name="CartProduct" component={CartProduct} />          
           <RootStack.Screen name="Product" component={Product} />
           <RootStack.Screen name="Profile" component={ProfileScreen} />
           <RootStack.Screen name="Pay" component={Pay} />
+          <RootStack.Screen name="Baomat" component={Baomat} />
+          <RootStack.Screen name="Danhgia" component={Danhgia} />
+          <RootStack.Screen name="Dieukhoan" component={Dieukhoan} />
+          <RootStack.Screen name="Info" component={Info} />
+          <RootStack.Screen name="Walet" component={Walet} />
+          <RootStack.Screen name="Exclamation" component={Exclamation} />
+          <RootStack.Screen name="Donhang" component={Donhang} />
         </RootStack.Navigator>
       </NavigationContainer>
     </AppProvider>
