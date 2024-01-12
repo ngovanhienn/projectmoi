@@ -42,7 +42,7 @@ const Donhang = () => {
       .collection('Order')
       .doc(idorder)
       .update({
-        state: 'Đơn hàng đã được giao',
+        state: 'Đã giao',
       })
       .then(() => {
         // setXacnhan(true);

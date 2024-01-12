@@ -116,10 +116,10 @@ const AuthStack = () => {
     <AppProvider>
       <NavigationContainer>
         <RootStack.Navigator
-          // initialRouteName="Login"
+          initialRouteName="Login"
           screenOptions={{headerShown: false}}>      
-          {/* <RootStack.Screen name="Signin" component={Signin} />
-          <RootStack.Screen name="Signup" component={Signup} /> */}
+          <RootStack.Screen name="Signin" component={Signin} />
+          <RootStack.Screen name="Signup" component={Signup} />
           <RootStack.Screen name="HomeScreen" component={AppStack} />
           {/* <RootStack.Screen name="HomeScreen" component={HomeScreen} /> */}
           <RootStack.Screen name="ChitietSP" component={ChitietSP} />

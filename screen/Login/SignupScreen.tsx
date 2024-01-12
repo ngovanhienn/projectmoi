@@ -11,21 +11,54 @@ import {
   Image,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 export default function Signup({navigation}) {
-  const signUpTestFn = () => {
+  // const signUpTestFn = () => {
+  //   auth()
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then(() => {
+  //       Alert.alert('Đăng ký thành công');
+  //       navigation.navigate('Signin');
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       Alert.alert('yêu cầu phải có @ và mật khẩu phải trên 6 ký tự');
+  //     });
+  // };
+  const signUpTestFn = async () => {
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        Alert.alert('Đăng ký thành công');
-        navigation.navigate('Signin');
+      .then(userCredential => {
+        const user = userCredential.user;
+        const uid = user.uid;
+
+        // Lưu thông tin người dùng vào Firestore
+        firestore()
+          .collection('User')
+          .doc(uid)
+          .set({
+            email: user.email,
+            username: username,
+          })
+          .then(() => {
+            Alert.alert('Đăng ký thành công');
+            navigation.navigate('Signin');
+          })
+          .catch(error => {
+            Alert.alert('Lỗi khi lưu thông tin người dùng:', error);
+          });
       })
-      .catch(err => {
-        console.log(err);
-        Alert.alert('yêu cầu phải có @ và mật khẩu phải trên 6 ký tự');
+      .catch(error => {
+        Alert.alert(
+          'Lỗi',
+          `Lỗi khi đăng ký: yêu cầu mật khẩu phải trên 6 số và email đúng định dạng`,
+        );
       });
   };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   return (
     <View style={styles.container}>
       <View style={{alignItems: 'center'}}>
@@ -41,6 +74,12 @@ export default function Signup({navigation}) {
         </View>
 
         <View>
+          <TextInput
+            style={styles.input1}
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
+          />
           <TextInput
             style={styles.input1}
             placeholder="Email"
@@ -65,9 +104,7 @@ export default function Signup({navigation}) {
         </View>
         <View style={styles.signup}>
           <View style={styles.but3}>
-            <Text style={styles.but5}>
-              Bằng việc đăng ký, bạn đồng ý với
-            </Text>
+            <Text style={styles.but5}>Bằng việc đăng ký, bạn đồng ý với</Text>
           </View>
 
           <View style={styles.rules}>
@@ -85,9 +122,9 @@ export default function Signup({navigation}) {
               <Text style={styles.new}>Chính sách bảo mật </Text>
             </TouchableOpacity>
           </View>
-            <View style={styles.but3}>
-              <Text style={styles.but5}>của chúng tôi</Text>
-            </View>
+          <View style={styles.but3}>
+            <Text style={styles.but5}>của chúng tôi</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -136,14 +173,14 @@ const styles = StyleSheet.create({
     color: '#444',
     fontSize: 12,
   },
- 
+
   new: {color: '#666', fontSize: 14, color: '#009900', fontWeight: '600'},
   signup: {
     justifyContent: 'center',
-    marginTop:180
+    marginTop: 126,
   },
-  rules:{
-    flexDirection:'row'
+  rules: {
+    flexDirection: 'row',
   },
   but3: {
     // width: 300,
