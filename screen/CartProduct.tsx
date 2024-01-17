@@ -76,7 +76,15 @@ const Giohang = () => {
     (total, product) => total + product.price * product.quantity,
     0,
   );
-  let formattedTotalAmount = totalAmount.toLocaleString();
+
+  let totalAmountNumber = totalAmount.toLocaleString();
+  // Chuỗi số định dạng
+
+  let formattedTotalAmount = parseFloat(totalAmountNumber.replace(/,/g, ""));
+  console.log(formattedTotalAmount); // Output: 1234.56
+
+  // let formattedTotalAmount= totalAmount.toLocaleString();
+
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -87,9 +95,7 @@ const Giohang = () => {
         navigation={navigation}
         source={require('../Image/book.jpg')}
         trangcon="Donhang"
-        nd={
-         undefined
-        }
+        nd={undefined}
         ht={false}
         onPress={undefined}
       />

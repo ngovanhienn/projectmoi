@@ -98,7 +98,7 @@ const Pay = ({route}: any) => {
       setSdt('');
       setDiachi('');
       FetchOrder();
-      handleDeleteData();
+      // handleDeleteData();
       Alert.alert('thêm thành công');
     } catch (error) {
       console.log('Lỗi: ', error);

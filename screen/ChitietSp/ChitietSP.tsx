@@ -333,7 +333,7 @@ const ChitietSP = ({route, fetchUpdate}: any) => {
           {product.giamgia != 0 ? (
             <View style={styles.giamgia}>
               <Text style={styles.giagoc}>Giá từ: {parseFloat(product.giagoc).toLocaleString()}</Text>
-              <Text style={styles.giaban}>Còn: {product.price.toLocaleString()} </Text>
+              <Text style={styles.giaban}>Còn: {parseFloat(product.price).toLocaleString()} </Text>
             </View>
           ) : (
             <Text style={[styles.giaban, {marginTop: 5}]}>

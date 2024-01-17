@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#009933',
     textAlign: 'center',
+    
   },
   dess: {
     backgroundColor: '#BBBBBB',
@@ -90,6 +91,7 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: 'center',
     marginHorizontal: 7,
+    
   },
 });
 
